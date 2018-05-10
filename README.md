@@ -7,8 +7,8 @@ Recentemente nos últimos anos, está cada vez mais claro que HTTP não é apena
 
 O modelo proposto por Fielding permitiu uma forma muito simples e mais próxima da nossa realidade, dando sentido às requisições HTTP, conforme exemplos:
 
-* GET    http://www.mydomain.com/users
-* POST   http://www.mydomain.com/users/{name: jonh, age: 32}
+* GET    http://www.mydomain.com/users
+* POST   http://www.mydomain.com/users/{name: jonh}
 * DELETE http://www.mydomain.com/users/{id}
 
 Logo a comunidade percebeu que o modelo de arquitetura REST poderia ser utilizado na implementação de Web Services, com o objetivo de se integrar aplicações pela Web, e passaram a utilizá-lo como uma alternativa ao [SOAP](https://www.w3.org/TR/2000/NOTE-SOAP-20000508/).
