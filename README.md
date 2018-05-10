@@ -1,2 +1,2 @@
-# RESTful_Web_Services_com_ASP.NET_Core
+# RESTful Web Services com ASP.NET Core
 Tutorial demonstrando como implementar uma RESTful Web API com ASP.NET Core
