@@ -34,8 +34,17 @@ Um recurso em uma aplicação REST é uma abstração sobre um determinado tipo 
 Sendo assim, faz-se necessário a identificação do recurso através do conceito de URI (Uniform Resource Identifier). Seguem alguns exemplos de URI's:
 
 ```html
-* http://mydomain.com/products;
-* http://mydomain.com/customers;
-* http://mydomain.com/customers/01;
-* http://mydomain.com/sales.
+http://apirest.com/products;
+http://apirest.com/customers;
+http://apirest.com/customers/01;
+http://apirest.com/sales.
 ```
+
+As URI’s representam a interface dos seus serviços, definindo um contrato que será utilizado pelos clientes para acessá-los. Vejamos  algumas boas práticas na definição de URI’s:
+
+* Utilize URI's legíveis
+* Defina um padrão de URI na identificação dos recursos
+* Evite incluir na URI a operação a ser realizada no recurso. Utilize os métodos HTTP para manipulação dos recursos
+* Evite incluir na URI o formato desejado da representação do recurso
+** http://apirest.com/products/xml
+** http://apirest.com/customers/10?formato=json
