@@ -5,7 +5,7 @@ Recentemente nos últimos anos, está cada vez mais claro que HTTP não é apena
 
 **REST (Representational State Transfer)** é um modelo de arquitetura que foi especificado por Roy Fielding, um dos principais criadores do protocolo HTTP em sua tese de doutorado, e foi adotado como o modelo de arquitetura a ser utilizado na evolução do protocolo HTTP.  Consiste em princípios, padões e constraints que, quando implementadas, permitem a criação de um projeto com interfaces bem definidas.
 
-O modelo proposto por Fielding permitiu uma forma muito simples e mais próxima da nossa realidade, dando sentido às requisições HTTP, conforme exemplos:
+O modelo proposto por Fielding permitiu uma forma muito simples e mais coesa, dando sentido às requisições HTTP, conforme exemplos:
 
 * GET http://www.mydomain.com/users
 * POST http://www.mydomain.com/users/{name:jonh}
