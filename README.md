@@ -20,3 +20,22 @@ Logo a comunidade percebeu que o modelo de arquitetura REST poderia ser utilizad
 ## Pré-Requisitos
 
 1. Instalar o [Visual Studio 2017](https://www.visualstudio.com/downloads/) – Pode ser o community 
+
+## Princípios de uma aplicação RESTful
+
+A seguir vamos apresentar os princípios do RESTful e como utilizá-los de maneira correta na sua aplicação.
+
+### Identificação dos Recursos
+
+Toda aplicação gerencia algumas informações. Uma aplicação de um E-commerce, por exemplo, gerencia seus produtos, clientes, vendas, etc. Essas coisas que uma aplicação gerencia são chamadas de Recursos no modelo REST.
+
+Um recurso em uma aplicação REST é uma abstração sobre um determinado tipo de informação que uma aplicação gerencia. Entretanto, um dos princípios do REST consiste que todo recurso deve possuir um identificador único.
+
+Sendo assim, faz-se necessário a identificação do recurso através do conceito de URI (Uniform Resource Identifier). Seguem alguns exemplos de URI's:
+
+```html
+* http://mydomain.com/products;
+* http://mydomain.com/customers;
+* http://mydomain.com/customers/01;
+* http://mydomain.com/sales.
+```
