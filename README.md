@@ -44,7 +44,11 @@ As URI’s representam a interface dos seus serviços, definindo um contrato que
 
 * Utilize URI's legíveis
 * Evite incluir na URI a operação a ser realizada no recurso. Utilize os métodos HTTP para manipulação dos recursos conforme quadro abaixo: 
-** ![API Methods](images/1.png)
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+![API Methods](images/1.png)
 
 * Defina um padrão de URI na identificação dos recursos
 * Evite incluir na URI o formato desejado da representação do recurso.
