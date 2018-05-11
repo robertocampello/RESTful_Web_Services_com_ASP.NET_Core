@@ -48,9 +48,6 @@ As URI’s representam a interface dos seus serviços, definindo um contrato que
   ![API Methods](images/1.png)
 
 * **Defina um padrão de URI na identificação dos recursos**
-
-  ![API Methods](images/1.png)
-
 * **Evite incluir na URI o formato desejado da representação do recurso.**
 ```http://apirest.com/products/xml```
 ```http://apirest.com/customers/10?formato=json```
