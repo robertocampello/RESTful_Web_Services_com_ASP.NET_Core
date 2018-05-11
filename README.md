@@ -43,9 +43,7 @@ http://apirest.com/sales.
 As URI’s representam a interface dos seus serviços, definindo um contrato que será utilizado pelos clientes para acessá-los. Vejamos  algumas boas práticas na definição de URI’s:
 
 * Utilize URI's legíveis
-* Evite incluir na URI a operação a ser realizada no recurso. Utilize os métodos HTTP para manipulação dos recursos conforme quadro abaixo:
-
-![API Methods](images/1.png)
+* Evite incluir na URI a operação a ser realizada no recurso. Utilize os métodos HTTP para manipulação dos recursos conforme quadro abaixo: ![API Methods](images/1.png)
 
 * Defina um padrão de URI na identificação dos recursos
 * Evite incluir na URI o formato desejado da representação do recurso.
