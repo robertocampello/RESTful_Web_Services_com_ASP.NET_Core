@@ -54,3 +54,22 @@ As URI’s representam a interface dos seus serviços, definindo um contrato que
 * **Evite incluir na URI o formato desejado da representação do recurso.**
 ```http://apirest.com/products/xml```
 ```http://apirest.com/customers/10?formato=json```
+
+### Representação dos Recursos
+
+Os recursos são armazenados pela aplicação que os manipula. Quando são solicitados pelas aplicações clientes, por exemplo em uma solicitação do tipo GET, é transferido para a aplicação cliente uma representação do recurso.
+
+Um recurso pode ser representado através de diversos formatos, tais como ```XML```, ```JSON```, ```HTML```, ```CSV```, entre outros. Abaixo é demonstrado um exemplo de representação de um recurso no formato XML:
+
+```XML
+<customer>
+  <name>Jonh</name>
+  <email>jonh@email.com</email>
+  <sexo>Masculino</sexo>
+  <address>
+    <city>Orlando</cidade>
+    <zip_code>44492</zip_code>
+  </address>
+</customer>
+```
+
