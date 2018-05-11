@@ -46,7 +46,5 @@ As URI’s representam a interface dos seus serviços, definindo um contrato que
 * Defina um padrão de URI na identificação dos recursos
 * Evite incluir na URI a operação a ser realizada no recurso. Utilize os métodos HTTP para manipulação dos recursos
 * Evite incluir na URI o formato desejado da representação do recurso
-```html
-http://apirest.com/products/xml
-http://apirest.com/customers/10?formato=json
-```
+```http://apirest.com/products/xml```
+```http://apirest.com/customers/10?formato=json```
