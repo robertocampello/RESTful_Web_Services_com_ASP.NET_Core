@@ -94,7 +94,7 @@ Solicitações feitas por um cliente a um serviço REST devem conter todas as in
 
 ### Evite manter dados de autenticação/autorização em sessão
 
-Uma das principais dificuldades de se criar um serviço REST totalmente Stateless ocorre quando há necessidade de prover autenticação/autorização de clientes. O principal problema ocorre por que é natural que os desenvolvedores armazenem essas informações em sessão, pois essa solução é comum ao se desenvolver uma aplicação Web tradicional.
+Uma das principais dificuldades de se criar um serviço REST totalmente Stateless ocorre quando **há necessidade de prover autenticação/autorização de clientes**. O principal problema ocorre por que é natural que os desenvolvedores armazenem essas informações em sessão, pois essa solução é comum ao se desenvolver uma aplicação Web tradicional.
 
 Para solucionar o problema é necessário a utilização de Tokens de acesso, que são gerados pelo serviço REST e devem ser armazenados pelos clientes, via **cookies** ou **HTML5 Web Storage**, devendo também serem enviados pelos clientes a cada nova solicitação ao serviço.
 
