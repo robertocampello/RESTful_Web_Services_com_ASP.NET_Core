@@ -90,8 +90,20 @@ O protocolo HTTP é um protocolo que não guarda estado de conversação, ou sej
 
 Manter uma comunicação stateless é importante, pois ganha-se em escalabilidade e alta performance, podendo com isto atender um número alto de clientes sem problemas.
 
-Solicitações feitas por um cliente a um serviço REST devem conter todas as informações necessárias para que o servidor as processe corretamente. Clientes **não devem** depender de dados **previamente armazenados** no servidor para processar uma requisição. Qualquer informação de estado deve ser mantida pelo cliente e não pelo servidor. 
+Solicitações feitas por um cliente a um serviço REST devem conter todas as informações necessárias para que o servidor as processe corretamente. Clientes **não devem** depender de dados **previamente armazenados** no servidor para processar uma requisição. Qualquer informação de estado deve ser mantida pelo cliente e não pelo servidor.
 
-É possível ter ganho de escalabilidade e performance tão boa em uma aplicaa Web ter uma escalabilidade e performance tão boas, a ponto de conseguir suportar tamanho número de clientes sem problemas?
+### Evite manter dados de autenticação/autorização em sessão
 
-Como vimos no item anterior um serviço REST pode suportar múltiplas representações de recursos. Portanto, nesses casos é esperado que o 
+Uma das principais dificuldades de se criar um serviço REST totalmente Stateless ocorre quando há necessidade de prover autenticação/autorização de clientes. O principal problema ocorre por que é natural que os desenvolvedores armazenem essas informações em sessão, pois essa solução é comum ao se desenvolver uma aplicação Web tradicional.
+
+Para solucionar o problema é necessário a utilização de Tokens de acesso, que são gerados pelo serviço REST e devem ser armazenados pelos clientes, via **cookies** ou **HTML5 Web Storage**, devendo também serem enviados pelos clientes a cada nova solicitação ao serviço.
+
+Existem **diversas tecnologias** e padrões para se trabalhar com Tokens, entre as principais:
+
+* [OAUTH](https://oauth.net/2/)
+* [JWT (JSON Web Token)](https://jwt.io/introduction/)
+* [Keycloack](https://www.keycloak.org/index.html)
+
+Portanto, evite a utilização de objetos session em aplicações REST. O ideal é que sua aplicação seja **totalmente Stateless**.
+
+### HATEOAS (Hypermedia As The Engine Of Application State)
