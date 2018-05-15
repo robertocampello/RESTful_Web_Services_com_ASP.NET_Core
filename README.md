@@ -108,7 +108,7 @@ Portanto, evite a utilização de objetos session em aplicações REST. O ideal 
 
 ### HATEOAS (Hypermedia As The Engine Of Application State)
 
-Este conceito é muito aplicado no desenvolvimento de aplicações Web. Consiste em um mecanismo para orientar conduzir o cliente quanto à navegação e ao estado dos recursos. **HATEOAS**, nada mais é do que a utilização de Hypermedia, com o uso de links, como o motor para guiar os clientes quanto ao estado atual dos recursos, e também quanto as transições de estado que são possíveis no momento.
+Este conceito é muito aplicado no desenvolvimento de aplicações Web. Consiste em um mecanismo para orientar conduzir o cliente quanto à navegação e ao estado dos recursos. [HATEOAS](https://restfulapi.net/hateoas/), nada mais é do que a utilização de Hypermedia, com o uso de links, como o motor para guiar os clientes quanto ao estado atual dos recursos, e também quanto as transições de estado que são possíveis no momento.
 
 Veja um exemplo de uma representação de um recurso **sem a utilização** do conceito de **HATEOAS**:
 
@@ -152,4 +152,4 @@ As dúvidas acima poderiam ser respondidas se o conceito HATEOAS fosse aplicado,
 </order>
 ```
 
-Observe que agora ficou mais simples explorar as informações e descobrir quais caminhos seguir. HATEOAS é um dos princípios pouco implementado no desenvolvimento de serviços REST no mercado, quase sempre por falta de conhecimento dos desenvolvedores.
+Observe que agora ficou mais simples explorar as informações e descobrir quais caminhos seguir. **HATEOAS** é um dos princípios pouco implementado no desenvolvimento de serviços REST no mercado, quase sempre por falta de conhecimento dos desenvolvedores.
