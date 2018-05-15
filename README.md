@@ -110,7 +110,7 @@ Portanto, evite a utilização de objetos session em aplicações REST. O ideal 
 
 Este conceito é muito aplicado no desenvolvimento de aplicações Web. Consiste em um mecanismo para orientar conduzir o cliente quanto à navegação e ao estado dos recursos. **HATEOAS**, nada mais é do que a utilização de Hypermedia, com o uso de links, como o motor para guiar os clientes quanto ao estado atual dos recursos, e também quanto as transições de estado que são possíveis no momento.
 
-Veja um exemplo de uma representação de um recurso sem a utilização do conceito de HATEOAS:
+Veja um exemplo de uma representação de um recurso **sem a utilização** do conceito de **HATEOAS**:
 
 ```html
 <order>
@@ -122,3 +122,34 @@ Veja um exemplo de uma representação de um recurso sem a utilização do conce
   </customer>
 </order>
 ```
+
+A representação do recurso sem a utilização de HATEOAS, pode gerar dúvidas como:
+
+* É possível solicitar o cancelamento do pedido? Como solicito?
+* Como obter mais informações sobre o cliente desse pedido?
+* Quais são os outros estados do pedido e como transitar entre eles?
+
+As dúvidas acima poderiam ser respondidas se o conceito HATEOAS fosse aplicado, facilitando assim o entendimento dos clientes do serviço REST. Vejamos agora a representação **utilizando o conceito** HATEOAS:
+
+```html
+<order self="http://servicorest.com.br/pedidos/1459">
+  <id>1870</id>
+  <date>2018-05-15</data>
+  <status>OPEN</status>
+  <customer ref="http://apirest.com/customers/780" />
+  <actions>
+    <action>
+      <rel>self</rel>
+      <uri>http://apirest.com/orders/1870</uri>
+      <method>GET</method>
+    </action>
+    <action>
+      <rel>cancelar</rel>
+      <uri>http://apirest.com/orders/1870</uri>
+      <method>DELETE</method>
+    </action>
+  </actions>
+</order>
+```
+
+Observe que agora ficou mais simples explorar as informações e descobrir quais caminhos seguir. HATEOAS é um dos princípios pouco implementado no desenvolvimento de serviços REST no mercado, quase sempre por falta de conhecimento dos desenvolvedores.
