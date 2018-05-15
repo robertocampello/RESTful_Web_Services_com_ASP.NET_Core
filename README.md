@@ -107,3 +107,18 @@ Existem **diversas tecnologias** e padrões para se trabalhar com Tokens, entre 
 Portanto, evite a utilização de objetos session em aplicações REST. O ideal é que sua aplicação seja **totalmente Stateless**.
 
 ### HATEOAS (Hypermedia As The Engine Of Application State)
+
+Este conceito é muito aplicado no desenvolvimento de aplicações Web. Consiste em um mecanismo para orientar conduzir o cliente quanto à navegação e ao estado dos recursos. **HATEOAS**, nada mais é do que a utilização de Hypermedia, com o uso de links, como o motor para guiar os clientes quanto ao estado atual dos recursos, e também quanto as transições de estado que são possíveis no momento.
+
+Veja um exemplo de uma representação de um recurso sem a utilização do conceito de HATEOAS:
+
+```html
+<order>
+  <id>1870</id>
+  <date>2018-05-15</date>
+  <status>OPEN</status>
+  <customer>
+    <name>Jonh</name>
+  </customer>
+</order>
+```
