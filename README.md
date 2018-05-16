@@ -17,10 +17,6 @@ Logo a comunidade percebeu que o modelo de arquitetura REST poderia ser utilizad
 
 [ASP.NET Web API](https://docs.microsoft.com/en-us/aspnet/web-api/) é uma framework para construir Web APIs. Neste tutorial iremos construir uma aplicação RESTful para um Cadastro de Produtos (CRUD), utilizando ASP.NET Web API. Vamos demonstrar também os princípios na implementação de uma aplicação RESTful.
 
-## Pré-Requisitos
-
-1. Instalar o [Visual Studio 2017](https://www.visualstudio.com/downloads/) – Pode ser o community 
-
 ## Princípios de uma aplicação RESTful
 
 A seguir vamos apresentar os princípios do RESTful e como utilizá-los de maneira correta na sua aplicação.
@@ -177,3 +173,8 @@ O diagrama demonstra o desenho basico da aplicação
 * A controller é um objeto que intercepta as solicitações HTTP e cria a resposta HTTP. Nossa aplicação terá uma única controller.
 
 * Para a camada de persistência será utilizado o banco de dados MongoDB.
+
+## Pré-Requisitos
+
+1. Instalar o [Visual Studio](https://www.microsoft.com/net/download/windows) – Pode ser o community 
+2. Ter conhecimento no desenvolvimento **Web ASP.NET** e **.NET Core cross-platform**
