@@ -156,8 +156,14 @@ Observe que agora ficou mais simples explorar as informações e descobrir quais
 
 ### Utilização correta dos códigos HTTP
 
-Este na verdade é uma boa prática e não um princípio. Consiste na utilização correta do código HTTP para cada tipo de situação. Evite a  sempre utilizar um mesmo código genérico para todas as situações, como por exemplo o código **200** para solicitações bem-sucedidas ou o código **500** para solicitações malsucedidas. Vejamos abaixo os principais códigos HTTP e quando os utilizá-los:
+Esta na verdade é uma boa prática e não um princípio. Consiste na **utilização correta** do código HTTP para cada tipo de situação. Evite sempre **utilizar um mesmo código genérico** para todas as situações, como por exemplo o código **200** para solicitações bem-sucedidas ou o código **500** para solicitações malsucedidas. Vejamos abaixo os principais códigos HTTP e quando os utilizá-los:
 
 ![HTTP Codes](images/3.png)
 
-Agora que já vimos os princípios de uma aplicação REST, vamos iniciar o nosso projeto POC.
+## Criando uma aplicação Web API com ASP.NET Core
+
+Agora que já vimos os principais princípios de uma aplicação REST, vamos iniciar o nosso projeto POC. Como já dito nós vamos construir uma aplicação RESTful para um **Cadastro de Produtos (CRUD)**. O quadro abaixo demonstra a API que desenvolveremos neste tutorial:
+
+![API App](images/4.png)
+
+
