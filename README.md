@@ -188,3 +188,11 @@ Primeiro, abra o Visual Studio e crie um novo projeto C#. Escolha o template **A
 Após, selecione o template **API** e clique em **OK**.
 
 ![Template API](images/7.png)
+
+### Execute a aplicação
+
+Uma vez, tendo o projeto criado a seguinte estrutura de diretórios será definida para solution, conforme figura abaixo. Você pode pressionar CTRL+F5 para iniciar a aplicação. Visual Studio abre o browser padrão e acessa a url ```http://localhost:<port>/api/values```, onde ```<port>```é escolhida randomicamente is a randomly chosen port number. Se tudo estiver certo você verá o seguinte resultado:
+
+```json
+["value1","value2"]
+```
