@@ -153,3 +153,11 @@ As dúvidas acima poderiam ser respondidas se o conceito HATEOAS fosse aplicado,
 ```
 
 Observe que agora ficou mais simples explorar as informações e descobrir quais caminhos seguir. **HATEOAS** é um dos princípios pouco implementado no desenvolvimento de serviços REST no mercado, quase sempre por falta de conhecimento dos desenvolvedores.
+
+### Utilização correta dos códigos HTTP
+
+Este na verdade é uma boa prática e não um princípio. Consiste na utilização correta do código HTTP para cada tipo de situação. Evite a  sempre utilizar um mesmo código genérico para todas as situações, como por exemplo o código **200** para solicitações bem-sucedidas ou o código **500** para solicitações malsucedidas. Vejamos abaixo os principais códigos HTTP e quando os utilizá-los:
+
+![HTTP Codes](images/3.png)
+
+Agora que já vimos os princípios de uma aplicação REST, vamos iniciar o nosso projeto POC.
