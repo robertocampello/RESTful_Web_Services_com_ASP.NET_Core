@@ -181,6 +181,7 @@ O diagrama demonstra o desenho basico da aplicação
 
 ## Criando o projeto
 
-Primeiro, abra o Visual Studio e crie um novo projeto C#. Escolha o template **ASP.NET Core Web Application** para o seu novo projeto.
+Primeiro, abra o Visual Studio e crie um novo projeto C#. Escolha o template **ASP.NET Core Web Application** e pressione **OK**.
 
 ![New Project](images/6.png)
+
