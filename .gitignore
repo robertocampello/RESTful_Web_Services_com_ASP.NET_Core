@@ -3,3 +3,5 @@
 ################################################################################
 
 /ProductAPI/.vs
+/ProductAPI/ProductAPI/bin/Debug/netcoreapp2.0
+/ProductAPI/ProductAPI/obj
