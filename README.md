@@ -185,3 +185,6 @@ Primeiro, abra o Visual Studio e crie um novo projeto C#. Escolha o template **A
 
 ![New Project](images/6.png)
 
+Após, selecione o template **API** e clique em **OK**.
+
+![Template API](images/7.png)
