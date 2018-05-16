@@ -162,8 +162,10 @@ Esta na verdade é uma boa prática e não um princípio. Consiste na **utiliza�
 
 ## Criando uma aplicação Web API com ASP.NET Core
 
-Agora que já vimos os principais princípios de uma aplicação REST, vamos iniciar o nosso projeto POC. Como já dito nós vamos construir uma aplicação RESTful para um **Cadastro de Produtos (CRUD)**. O quadro abaixo demonstra a API que desenvolveremos neste tutorial:
+Agora que já vimos os **principais princípios** de uma aplicação REST, vamos iniciar o nosso projeto POC. Como já dito nós vamos construir uma aplicação RESTful para um **Cadastro de Produtos (CRUD)**. O quadro abaixo demonstra a API que desenvolveremos neste tutorial:
 
 ![API App](images/4.png)
 
+O diagrama demonstra o desenho basico da aplicação
 
+![Diagram App](images/5.png)
