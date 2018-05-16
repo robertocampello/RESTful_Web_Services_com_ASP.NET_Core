@@ -191,7 +191,7 @@ Após, selecione o template **API** e clique em **OK**.
 
 ### Executando a aplicação
 
-Tendo o projeto criado você pode pressionar **CTRL+F5** para iniciar a aplicação. O Visual Studio abre o browser padrão e acessa a url ```http://localhost:<port>/api/values```, onde ```<port>``` é escolhida randomicamente. Se tudo estiver certo você verá o seguinte resultado:
+Tendo o projeto criado você pode pressionar **CTRL+F5** para iniciar a aplicação. O Visual Studio abre o browser padrão e acessa a url ```http://localhost:<port>/api/values```, onde ```<port>``` é escolhida randomicamente. Se tudo estiver correto você verá o seguinte resultado no browser:
 
 ```html
 ["value1","value2"]
