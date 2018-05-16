@@ -169,3 +169,11 @@ Agora que já vimos os **principais princípios** de uma aplicação REST, vamos
 O diagrama demonstra o desenho basico da aplicação
 
 ![Diagram App](images/5.png)
+
+* A aplicação cliente que vai consumir a Web API pode ser um (mobile app, browser, etc.). Neste tutorial nós não iremos uma criar uma aplicação cliente. Entretanto, você pode acessar o tutorial que demonstra como consumir uma [Web API REST através de um app Xamarin]().
+
+* O modelo é um objeto que representa os dados na aplicação. Neste caso, o único modelo na nossa aplicação é um produto. Modelos são representados como classes C#, também conhecidas como **Plain Old C# Object (POCOs)**.
+
+* A controller é um objeto que intercepta as solicitações HTTP e cria a resposta HTTP. Nossa aplicação terá uma única controller.
+
+* Para a camada de persistência será utilizado o banco de dados MongoDB.
