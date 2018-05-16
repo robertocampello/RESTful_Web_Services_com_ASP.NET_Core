@@ -178,3 +178,9 @@ O diagrama demonstra o desenho basico da aplicação
 
 1. Instalar o [Visual Studio](https://www.microsoft.com/net/download/windows) – Pode ser o community 
 2. Ter conhecimento no desenvolvimento **Web ASP.NET** e **.NET Core cross-platform**
+
+## Criando o projeto
+
+Primeiro, abra o Visual Studio e crie um novo projeto C#. Escolha o template **ASP.NET Core Web Application** para o seu novo projeto.
+
+![New Project](images/6.png)
