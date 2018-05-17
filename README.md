@@ -172,7 +172,7 @@ O diagrama demonstra o desenho basico da aplicação
 
 * A controller é um objeto que intercepta as solicitações HTTP e cria a resposta HTTP. Nossa aplicação terá uma única controller.
 
-* Para a camada de persistência será utilizado o banco de dados MongoDB.
+* Para simplificar a camada de persistência, será utilizado o banco de dados em memória.
 
 ## Pré-Requisitos
 
@@ -189,10 +189,216 @@ Após, selecione o template **API** e clique em **OK**.
 
 ![Template API](images/7.png)
 
-### Execute a aplicação
+### Executando a aplicação
 
-Tendo o projeto criado você pode pressionar **CTRL+F5** para iniciar a aplicação. O Visual Studio abre o browser padrão e acessa a url ```http://localhost:<port>/api/values```, onde ```<port>``` é escolhida randomicamente. Se tudo estiver certo você verá o seguinte resultado:
+Tendo o projeto criado você pode pressionar **CTRL+F5** para iniciar a aplicação. O Visual Studio abre o browser padrão e acessa a url ```http://localhost:<port>/api/values```, onde ```<port>``` é escolhida randomicamente. Se tudo estiver correto você verá o seguinte resultado no browser:
 
 ```html
 ["value1","value2"]
 ```
+
+### Adicionando a Classe Model
+
+Um modelo é um objeto que representa os dados na aplicação. Neste tutorial, teremos somente a classe modelo produto. Na **Solution Explorer**, clique com o botão direito do mouse no projeto e selecione **Add > New Folder**. Defina *Models* para o nome da pasta.
+
+**Observação:** Uma classe modelo pode residir em qualquer lugar no projeto. Por convenção recomenda-se a criação de uma pasta **Models** para inclusão das classes model.
+
+Após, crie a classe modelo clicando com o botão direito na pasta a *Models* e Selecione **Add > New Class**. Defina *Product* para o nome da classe.
+
+Altere a classe ```Product``` com o código definido abaixo:
+
+```C#
+namespace ProductAPI.Models
+{
+    public class Product {
+        // Atributos de classe
+        private int     productID;
+        private String  productCode;
+        private String  name;
+        private int     quantity;
+        private decimal price;
+
+        // Propriedades
+        public int     ProductID   { get => productID; set => productID = value; }
+        public string  ProductCode { get => productCode; set => productCode = value; }
+        public string  Name        { get => name; set => name = value; }
+        public int     Quantity    { get => quantity; set => quantity = value; }
+        public decimal Price       { get => price; set => price = value; }
+    }
+}
+```
+
+### Criando o Database Context
+
+O database context é a classe main que coordena as operações do [Entity Framework](https://docs.microsoft.com/en-us/ef/) para um dado modelo de dados. A classe deve estender da classe ```Microsoft.EntityFrameworkCore.DbContext```.
+
+Na **Solution Explorer** clique com o botão direito na pasta a *Models* e selecione **Add > New Class**. Defina *ProductContext* para o nome da classe.
+
+Altere a classe ```ProductContext``` com o código definido abaixo:
+
+```C#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
+namespace ProductAPI.Models
+{
+    public class ProductContext : DbContext {
+        // Construtor da classe
+        public ProductContext(DbContextOptions<ProductContext> options) : 
+            base(options) {
+        }
+
+        // Propriedade que retorna o DbSet de Produto
+        public DbSet<Product> ProductItems { get; set; }
+    }
+}
+```
+
+### Registrando o Database Context
+
+Neste passo, nós iremos registrar o database context com o container de [injeção de dependência](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-2.1). Serviços (como DB context) que são registrados com **dependency injection (DI) container** ficam disponíveis para os objetos controller.
+
+Para registrar um DB context é necessário criar uma classe chamada [Startup](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/startup?view=aspnetcore-2.1). Esta classe possui o método ```ConfigureServices``` responsável pela definição de serviços que a aplicação irá usar, incluindo componentes da plataforma como **Entity Framework Core** e **ASP.NET Core MVC**. Este método é invocado em tempo de execução quando a aplicação é iniciada.
+
+Quando você cria o projeto **ASP.NET Core Web Application**, usando o template **API** a classe a classe ```Startup``` é criada automáticamente. Altere o código da classe conforme definido abaixo:
+
+```C#
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using ProductAPI.Models;
+
+namespace ProductAPI
+{
+    public class Startup {
+        public Startup(IConfiguration configuration) {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services) {
+            // Add framework services.
+            services.AddDbContext<ProductContext>(opt => opt.UseInMemoryDatabase("ProductList"));
+            services.AddMvc();
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
+            app.UseMvc();
+        }
+    }
+}
+```
+
+### Criando a classe Controller 
+
+Na Solution Explorer, clique com o botão direito na pasta *Controllers* e selecione **Add > New Item**. Na caixa de diálogo apresentada, selecione o template **API Controller - Empty**. Defina ```ProductController``` para o nome da classe e pressione **Add**.
+
+```C#
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using ProductAPI.Models;
+
+namespace ProductAPI.Controllers
+{
+    [Produces("application/json")]
+    [Route("api/product")]
+    public class ProductController : ControllerBase {
+        private readonly ProductContext context;
+
+        // Construtor da classe
+        public ProductController(ProductContext context) {
+            this.context = context;
+
+            if (this.context.ProductItems.Count() == 0) {
+                this.context.ProductItems.Add(new Product { ProductCode = "Product Code 1", Name = "Product Item 1",
+                    Quantity = 1, Price = new decimal(110.50) });
+                this.context.SaveChanges();
+            }
+        }
+    }
+}
+````
+
+Usando este template a classe é criada sem métodos. Nas próximas seções nós **incluir os métodos da API**.
+
+O construtor da classe usa [Dependency Injection](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-2.0) para injetar o database context ```ProductContext``` no atributo context da controller. 
+O database context é usado em cada **método CRUD** da controller. O construtor adiciona um item no database memory, caso não exista.
+
+### Obtendo itens de produto
+
+Para obter um **produto através do ID** ou uma **lista de produtos**, inclua os seguintes métodos na classe ```ProductController```:
+
+```C#
+/// <summary>
+/// Retorna lista de todos os produtos
+/// </summary>
+/// <returns></returns>
+[HttpGet]
+public List<Product> GetAll() {
+    return context.ProductItems.ToList();
+}
+
+/// <summary>
+/// Retorna um produto através do ID
+/// </summary>
+/// <param name="id"></param>
+/// <returns></returns>
+[HttpGet("{id}")]
+public IActionResult GetById(int id) {
+    var item = context.ProductItems.Find(id);
+    if (item == null) {
+        return NotFound();
+    }
+    return Ok(item);
+}
+```
+
+Esses métodos implementam os **métodos GET**:
+
+* ```GET /api/Product```
+* ```GET /api/Product/{id}```
+
+Abaixo é demonstrado um exemplo de uma resposta HTTP para o método ```GetAll```:
+
+```XML
+
+```
+
+Mais demonstraremos como podemos visualizar uma resposta HTTP com [Postman](https://www.getpostman.com/) ou [curl](https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/curl.1.html).
+
+### Rotas e URL paths
+
+O atributo ```[HttpGet]``` define que o método responde a uma solicitação **HTTP GET**. A URL para cada método pode ser definida através do atributo ```Route``` definido na classe, conforme demonstrado abaixo:
+
+```C#
+namespace ProductAPI.Controllers
+{
+    [Produces("application/json")]
+    [Route("api/[controller]")]
+    public class ProductController : ControllerBase {
+        private readonly ProductContext context;
+```
+
+* Substitua ```[controller]``` pelo nome da classe controller sem a palavra "Controller". No nosso exemplo a classe controller é ```ProductController``` e o root name é ```product```. ASP.NET Core [routing](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-2.0) é case insensitive.
+* Se o atributo ```[HttpGet]``` definir uma rota como (```[HttpGet("/products")```], Não será mais considerado o valor definido no atributo ```Route```. Para maiores detalhes veja [Attribute routing with Http[Verb] attributes](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-2.0#attribute-routing-with-httpverb-attributes).
+
+### Retornando valores
+
+O método ```GetAll```retorna uma coleção de objetos ```Product```. A framework MVC automaticamente serializa o objeto [JSON](https://www.json.org/) e escreve no corpo da resposta. O código de resposta para este método é o **200**, assumindo que não ocorra nenhuma exception. Exceções não tratadas são convertidas em erros **5xx**.
+
+Já o método ```GetById``` retorna um objeto do tipo [IActionResult](https://docs.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-2.0#iactionresult-type) necessário quando há necessidade de retornar mais de um tipo de retorno.
+
+No método ```GetById``` da classe ```ProductController``` é retornado **NotFound (404)** caso não seja encontrado um produto com o código informado. Em caso de sucesso é retornado o código **200** com a representação JSON no corpo da resposta.
+
+### Testando a aplicação
+
+Podemos testar o que já foi desenvolvido até aqui, considerando os métodos ```GetXXX```. Para isto basta, pressionar **CTRL+F5** no Visual Studio para iniciar aplicação. O Visual Studio irá iniciar o browser e acessará a URL ```http://localhost:<port>/api/values```, onde ```<port>``` será uma porta definida randomicamente. Para executar o método que retorna todos os produtos acesse a URL ```http://localhost:<port>/api/product```.
+
