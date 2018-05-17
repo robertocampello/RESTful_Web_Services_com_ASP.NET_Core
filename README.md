@@ -388,7 +388,10 @@ namespace ProductAPI.Controllers
 ```
 
 * Substitua ```[controller]``` pelo nome da classe controller sem a palavra "Controller". No nosso exemplo a classe controller é ```ProductController``` e o root name é ```product```. ASP.NET Core [routing](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-2.0) é case insensitive.
-* Se o atributo ```[HttpGet]``` definir uma rota como (```[HttpGet("/products")```], Não será mais considerado o valor definido no atributo Route. Para maiores detalhes veja [Attribute routing with Http[Verb] attributes](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-2.0#attribute-routing-with-httpverb-attributes).
+* Se o atributo ```[HttpGet]``` definir uma rota como (```[HttpGet("/products")```], Não será mais considerado o valor definido no atributo ```Route```. Para maiores detalhes veja [Attribute routing with Http[Verb] attributes](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-2.0#attribute-routing-with-httpverb-attributes).
 
+### Retornando valores
+
+O método ```GetAll```retorna uma coleção de objetos ```Product```. A framework MVC automaticamente serializa o objeto [JSON](https://www.json.org/) e escreve no corpo da resposta.
 
 
