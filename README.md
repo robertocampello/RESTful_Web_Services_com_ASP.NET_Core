@@ -392,6 +392,13 @@ namespace ProductAPI.Controllers
 
 ### Retornando valores
 
-O método ```GetAll```retorna uma coleção de objetos ```Product```. A framework MVC automaticamente serializa o objeto [JSON](https://www.json.org/) e escreve no corpo da resposta.
+O método ```GetAll```retorna uma coleção de objetos ```Product```. A framework MVC automaticamente serializa o objeto [JSON](https://www.json.org/) e escreve no corpo da resposta. O código de resposta para este método é o **200**, assumindo que não ocorra nenhuma exception. Exceções não tratadas são convertidas em erros **5xx**.
 
+Já o método ```GetById``` retorna um objeto do tipo [IActionResult](https://docs.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-2.0#iactionresult-type) necessário quando há necessidade de retornar mais de um tipo de retorno.
+
+No método ```GetById``` da classe ```ProductController``` é retornado **NotFound (404)** caso não seja encontrado um produto com o código informado. Em caso de sucesso é retornado o código **200** com a representação JSON no corpo da resposta.
+
+### Testando a aplicação
+
+Podemos testar o que já foi desenvolvido até aqui, considerando os métodos ```GetXXX```. Para isto basta no Visual Studio, pressione **CTRL+F5** para iniciar aplicação. O Visual Studio irá iniciar o browser e acessará a URL ```http://localhost:<port>/api/values```, onde ```<port>``` será uma porta definida randomicamente. Para executar o método que retorna todos os produtos acesse a URL ```http://localhost:<port>/api/product```.
 
