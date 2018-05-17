@@ -199,7 +199,7 @@ Tendo o projeto criado você pode pressionar **CTRL+F5** para iniciar a aplicaç
 
 ### Adicionando a Classe Model
 
-Um modelo é um objeto que representa os dados na aplicação. Neste tutorial, teremos somente a classe modelo produto. Na Solution Explorer, clique com o botão direito do mouse no projeto e Selecione **Add > New Folder**. Defina *Models* para o nome da pasta.
+Um modelo é um objeto que representa os dados na aplicação. Neste tutorial, teremos somente a classe modelo produto. Na **Solution Explorer**, clique com o botão direito do mouse no projeto e Selecione **Add > New Folder**. Defina *Models* para o nome da pasta.
 
 **Observação:** Uma classe modelo pode residir em qualquer lugar no projeto. Por convenção recomenda-se a criação de uma pasta **Models** para inclusão das classes model.
 
@@ -230,9 +230,9 @@ namespace ProductAPI.Models
 
 ### Criando o Database Context
 
-O database context é a class main que coordena as funcionalidades do [Entity Framework](https://docs.microsoft.com/en-us/ef/) para um dado modelo de dados. A classe deve estender da classe ```Microsoft.EntityFrameworkCore.DbContext```.
+O database context é a classe main que coordena as funcionalidades do [Entity Framework](https://docs.microsoft.com/en-us/ef/) para um dado modelo de dados. A classe deve estender da classe ```Microsoft.EntityFrameworkCore.DbContext```.
 
-Na Solution Explorer clique com o botão direito na pasta a *Models* e Selecione **Add > New Class**. Defina *ProductContext* para o nome da classe.
+Na **Solution Explorer** clique com o botão direito na pasta a *Models* e Selecione **Add > New Class**. Defina *ProductContext* para o nome da classe.
 
 Altere a classe ```ProductContext``` com o código definido abaixo:
 
@@ -256,4 +256,14 @@ namespace ProductAPI.Models
     }
 }
 ```
+
+### Registrando o Database Context
+
+Neste passo, nós iremos registrar o database context com o container de [injeção de dependência](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-2.1). Serviços (como DB context) que são registrados com dependency injection (DI) container ficam disponíveis para os objetos controller.
+
+Para registrar um DB context é necessário criar uma classe chamada [Startup](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/startup?view=aspnetcore-2.1). Esta classe possui o método ```ConfigureServices``` responsável pela definição de serviços que a aplicação irá usar, incluindo componentes da plataforma como **Entity Framework Core** e **ASP.NET Core MVC**.
+
+Quando você cria o projeto **ASP.NET Core Web Application**, usando o template **API** a classe a classe ```Startup``` é criada automáticamente. Altere o código da classe conforme definido abaixo:
+
+
 
