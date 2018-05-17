@@ -352,7 +352,7 @@ public List<Product> GetAll() {
 /// <param name="id"></param>
 /// <returns></returns>
 [HttpGet("{id}")]
-public IActionResult GetById(long id) {
+public IActionResult GetById(int id) {
     var item = context.ProductItems.Find(id);
     if (item == null) {
         return NotFound();
@@ -376,7 +376,7 @@ Mais demonstraremos como podemos visualizar uma resposta HTTP com [Postman](http
 
 ### Rotas e URL paths
 
-O atributo ```[HttpGet]``` define que o método responde a uma solicitação **HTTP GET**. A URL para cada método pode ser definida através de template definido no atributo ```Route```, conforme demonstrado abaixo:
+O atributo ```[HttpGet]``` define que o método responde a uma solicitação **HTTP GET**. A URL para cada método pode ser definida através do atributo ```Route``` definido na classe, conforme demonstrado abaixo:
 
 ```C#
 namespace ProductAPI.Controllers
@@ -386,3 +386,9 @@ namespace ProductAPI.Controllers
     public class ProductController : ControllerBase {
         private readonly ProductContext context;
 ```
+
+* Substitua ```[controller]``` pelo nome da classe controller sem a palavra "Controller". No nosso exemplo a classe controller é ```ProductController``` e o root name é ```product```. ASP.NET Core [routing](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-2.0) é case insensitive.
+* Se o atributo ```[HttpGet]``` definir uma rota como (```[HttpGet("/products")```], Não será mais considerado o valor definido no atributo Route. Para maiores detalhes veja [Attribute routing with Http[Verb] attributes](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-2.0#attribute-routing-with-httpverb-attributes).
+
+
+
