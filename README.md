@@ -368,7 +368,7 @@ Esses métodos implementam os **métodos GET**:
 
 Abaixo é demonstrado um exemplo de uma resposta HTTP para o método ```GetAll```:
 
-```XML
+```json
 [
     {
         "productID": 1,
