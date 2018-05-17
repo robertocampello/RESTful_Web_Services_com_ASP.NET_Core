@@ -199,7 +199,7 @@ Tendo o projeto criado você pode pressionar **CTRL+F5** para iniciar a aplicaç
 
 ### Adicionando a Classe Model
 
-Um modelo é um objeto que representa os dados na aplicação. Neste tutorial, teremos somente a classe modelo produto. Na **Solution Explorer**, clique com o botão direito do mouse no projeto e Selecione **Add > New Folder**. Defina *Models* para o nome da pasta.
+Um modelo é um objeto que representa os dados na aplicação. Neste tutorial, teremos somente a classe modelo produto. Na **Solution Explorer**, clique com o botão direito do mouse no projeto e selecione **Add > New Folder**. Defina *Models* para o nome da pasta.
 
 **Observação:** Uma classe modelo pode residir em qualquer lugar no projeto. Por convenção recomenda-se a criação de uma pasta **Models** para inclusão das classes model.
 
@@ -230,9 +230,9 @@ namespace ProductAPI.Models
 
 ### Criando o Database Context
 
-O database context é a classe main que coordena as funcionalidades do [Entity Framework](https://docs.microsoft.com/en-us/ef/) para um dado modelo de dados. A classe deve estender da classe ```Microsoft.EntityFrameworkCore.DbContext```.
+O database context é a classe main que coordena as operações do [Entity Framework](https://docs.microsoft.com/en-us/ef/) para um dado modelo de dados. A classe deve estender da classe ```Microsoft.EntityFrameworkCore.DbContext```.
 
-Na **Solution Explorer** clique com o botão direito na pasta a *Models* e Selecione **Add > New Class**. Defina *ProductContext* para o nome da classe.
+Na **Solution Explorer** clique com o botão direito na pasta a *Models* e selecione **Add > New Class**. Defina *ProductContext* para o nome da classe.
 
 Altere a classe ```ProductContext``` com o código definido abaixo:
 
@@ -298,3 +298,32 @@ namespace ProductAPI
 ```
 
 ### Criando a classe Controller 
+
+Na Solution Explorer, clique com o botão direito na pasta *Controllers* e selecione **Add > New Item**. Na caixa de diálogo apresentada, selecione o template **API Controller - Empty**. Defina ```ProductController``` para o nome da classe e pressione **Add**.
+
+```C#
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using ProductAPI.Models;
+
+namespace ProductAPI.Controllers
+{
+    [Produces("application/json")]
+    [Route("api/Product")]
+    public class ProductController : ControllerBase {
+        private readonly ProductContext context;
+
+        // Construtor da classe
+        public ProductController(ProductContext context) {
+            this.context = context;
+
+            if (this.context.ProductItems.Count() == 0) {
+                this.context.ProductItems.Add(new Product { Name = "Item1" });
+                this.context.SaveChanges();
+            }
+        }
+    }
+}
+````
+
+Usando este template a classe é criada sem métodos. Nas próximas seções nós incluir os métodos da API.
