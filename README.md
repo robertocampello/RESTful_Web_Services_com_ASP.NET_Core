@@ -309,7 +309,7 @@ using ProductAPI.Models;
 namespace ProductAPI.Controllers
 {
     [Produces("application/json")]
-    [Route("api/product")]
+    [Route("api/products")]
     public class ProductController : ControllerBase {
         private readonly ProductContext context;
 
@@ -363,8 +363,8 @@ public IActionResult GetById(int id) {
 
 Esses métodos implementam os **métodos GET**:
 
-* ```GET /api/Product```
-* ```GET /api/Product/{id}```
+* ```GET /api/products```
+* ```GET /api/products/{id}```
 
 Abaixo é demonstrado um exemplo de uma resposta HTTP para o método ```GetAll```:
 
@@ -408,5 +408,5 @@ No método ```GetById``` da classe ```ProductController``` é retornado **NotFou
 
 ### Testando a aplicação
 
-Podemos testar o que já foi desenvolvido até aqui, considerando os métodos ```GetXXX```. Para isto basta, pressionar **CTRL+F5** no Visual Studio para iniciar aplicação. O Visual Studio irá iniciar o browser e acessará a URL ```http://localhost:<port>/api/values```, onde ```<port>``` será uma porta definida randomicamente. Para executar o método que retorna todos os produtos acesse a URL ```http://localhost:<port>/api/product```.
+Podemos testar o que já foi desenvolvido até aqui, considerando os métodos ```GetXXX```. Para isto basta, pressionar **CTRL+F5** no Visual Studio para iniciar aplicação. O Visual Studio irá iniciar o browser e acessará a URL ```http://localhost:<port>/api/values```, onde ```<port>``` será uma porta definida randomicamente. Para executar o método que retorna todos os produtos acesse a URL ```http://localhost:<port>/api/products```.
 
