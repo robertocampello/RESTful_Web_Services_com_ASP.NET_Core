@@ -203,9 +203,29 @@ Um modelo é um objeto que representa os dados na aplicação. Neste tutorial, t
 
 **Observação:** Uma classe modelo pode residir em qualquer lugar no projeto. Por convenção recomenda-se a criação de uma pasta **Models** para inclusão das classes model.
 
-Após, crie a classe modelo clicando com o botão direito na pasta a *Models* e Selecione **Add > New Class**. Defina ```Product``` para o nome da classe.
+Após, crie a classe modelo clicando com o botão direito na pasta a *Models* e Selecione **Add > New Class**. Defina *Product* para o nome da classe.
 
-Altere a classe com o código definido abaixo:
+Altere a classe ```Product``` com o código definido abaixo:
 
+```C#
+namespace ProductAPI.Models
+{
+    public class Product {
+        // Atributos de classe
+        private int     productID;
+        private String  productCode;
+        private String  name;
+        private int     quantity;
+        private decimal price;
+
+        // Propriedades
+        public int     ProductID   { get => productID; set => productID = value; }
+        public string  ProductCode { get => productCode; set => productCode = value; }
+        public string  Name        { get => name; set => name = value; }
+        public int     Quantity    { get => quantity; set => quantity = value; }
+        public decimal Price       { get => price; set => price = value; }
+    }
+}
+```
 
 
