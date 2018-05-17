@@ -318,7 +318,8 @@ namespace ProductAPI.Controllers
             this.context = context;
 
             if (this.context.ProductItems.Count() == 0) {
-                this.context.ProductItems.Add(new Product { Name = "Item1" });
+                this.context.ProductItems.Add(new Product { ProductCode = "Product Code 1", Name = "Product Item 1",
+                    Quantity = 1, Price = new decimal(110.50) });
                 this.context.SaveChanges();
             }
         }
@@ -326,4 +327,36 @@ namespace ProductAPI.Controllers
 }
 ````
 
-Usando este template a classe é criada sem métodos. Nas próximas seções nós incluir os métodos da API.
+Usando este template a classe é criada sem métodos. Nas próximas seções nós **incluir os métodos da API**.
+
+O construtor da classe usa [Dependency Injection](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-2.0) para injetar o database context ```ProductContext``` no atributo context da controller. 
+O database context é usado em cada **método CRUD** da controller. O construtor adiciona um item no database memory, caso não exista.
+
+### Obtendo itens de produto
+
+Para obter um produto através do ID ou uma lista de produtos, inclua os seguintes métodos na classe ```ProductController```:
+
+```C#
+/// <summary>
+/// Retorna lista de todos os produtos
+/// </summary>
+/// <returns></returns>
+[HttpGet]
+public List<Product> GetAll() {
+    return context.ProductItems.ToList();
+}
+
+/// <summary>
+/// Retorna um produto através do ID
+/// </summary>
+/// <param name="id"></param>
+/// <returns></returns>
+[HttpGet("{id}")]
+public IActionResult GetById(long id) {
+    var item = context.ProductItems.Find(id);
+    if (item == null) {
+        return NotFound();
+    }
+    return Ok(item);
+}
+```
