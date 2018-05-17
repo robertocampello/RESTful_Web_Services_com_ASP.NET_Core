@@ -228,7 +228,7 @@ namespace ProductAPI.Models
 }
 ```
 
-### Adicionando a Classe Model
+### Criando o Database Context
 
 O database context é a class main que coordena as funcionalidades do [Entity Framework](https://docs.microsoft.com/en-us/ef/) para um dado modelo de dados. A classe deve estender da classe ```Microsoft.EntityFrameworkCore.DbContext```.
 
