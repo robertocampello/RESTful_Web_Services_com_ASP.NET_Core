@@ -201,8 +201,11 @@ Tendo o projeto criado você pode pressionar **CTRL+F5** para iniciar a aplicaç
 
 Um modelo é um objeto que representa os dados na aplicação. Neste tutorial, teremos somente a classe modelo produto. Na Solution Explorer, clique com o botão direito do mouse no projeto e Selecione **Add > New Folder**. Defina *Models* para o nome da pasta.
 
-```**Observação:** Uma classe modelo pode residir em qualquer lugar no projeto. Por convenção recomenda-se a criação de uma pasta **Models** para inclusão das classes model.```
+**Observação:** Uma classe modelo pode residir em qualquer lugar no projeto. Por convenção recomenda-se a criação de uma pasta **Models** para inclusão das classes model.
 
+Após, crie a classe modelo clicando com o botão direito na pasta a *Models* e Selecione **Add > New Class**. Defina ```Product``` para o nome da classe.
+
+Altere a classe com o código definido abaixo:
 
 
 
