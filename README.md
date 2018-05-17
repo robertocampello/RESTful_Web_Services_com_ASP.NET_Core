@@ -369,7 +369,15 @@ Esses métodos implementam os **métodos GET**:
 Abaixo é demonstrado um exemplo de uma resposta HTTP para o método ```GetAll```:
 
 ```XML
-
+[
+    {
+        "productID": 1,
+        "productCode": "Product Code 1",
+        "name": "Product Item 1",
+        "quantity": 1,
+        "price": 110.5
+    }
+]
 ```
 
 Mais demonstraremos como podemos visualizar uma resposta HTTP com [Postman](https://www.getpostman.com/) ou [curl](https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/curl.1.html).
