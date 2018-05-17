@@ -172,7 +172,7 @@ O diagrama demonstra o desenho basico da aplicação
 
 * A controller é um objeto que intercepta as solicitações HTTP e cria a resposta HTTP. Nossa aplicação terá uma única controller.
 
-* Para a camada de persistência será utilizado o banco de dados MongoDB.
+* Para simplificar a camada de persistência, será utilizado o banco de dados em memória.
 
 ## Pré-Requisitos
 
@@ -228,4 +228,32 @@ namespace ProductAPI.Models
 }
 ```
 
+### Adicionando a Classe Model
+
+O database context é a class main que coordena as funcionalidades do [Entity Framework](https://docs.microsoft.com/en-us/ef/) para um dado modelo de dados. A classe deve estender da classe ```Microsoft.EntityFrameworkCore.DbContext```.
+
+Na Solution Explorer clique com o botão direito na pasta a *Models* e Selecione **Add > New Class**. Defina *ProductContext* para o nome da classe.
+
+Altere a classe ```ProductContext``` com o código definido abaixo:
+
+```C#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
+namespace ProductAPI.Models
+{
+    public class ProductContext : DbContext {
+        // Construtor da classe
+        public ProductContext(DbContextOptions<ProductContext> options) : 
+            base(options) {
+        }
+
+        // Propriedade que retorna o DbSet de Produto
+        public DbSet<Product> ProductItems { get; set; }
+    }
+}
+```
 
