@@ -309,7 +309,7 @@ using ProductAPI.Models;
 namespace ProductAPI.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Product")]
+    [Route("api/product")]
     public class ProductController : ControllerBase {
         private readonly ProductContext context;
 
@@ -334,7 +334,7 @@ O database context é usado em cada **método CRUD** da controller. O construtor
 
 ### Obtendo itens de produto
 
-Para obter um produto através do ID ou uma lista de produtos, inclua os seguintes métodos na classe ```ProductController```:
+Para obter um **produto através do ID** ou uma **lista de produtos**, inclua os seguintes métodos na classe ```ProductController```:
 
 ```C#
 /// <summary>
@@ -359,4 +359,30 @@ public IActionResult GetById(long id) {
     }
     return Ok(item);
 }
+```
+
+Esses métodos implementam os **métodos GET**:
+
+* ```GET /api/Product```
+* ```GET /api/Product/{id}```
+
+Abaixo é demonstrado um exemplo de uma resposta HTTP para o método ```GetAll```:
+
+```XML
+
+```
+
+Mais demonstraremos como podemos visualizar uma resposta HTTP com [Postman](https://www.getpostman.com/) ou [curl](https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/curl.1.html).
+
+### Rotas e URL paths
+
+O atributo ```[HttpGet]``` define que o método responde a uma solicitação **HTTP GET**. A URL para cada método pode ser definida através de template definido no atributo ```Route```, conforme demonstrado abaixo:
+
+```C#
+namespace ProductAPI.Controllers
+{
+    [Produces("application/json")]
+    [Route("api/[controller]")]
+    public class ProductController : ControllerBase {
+        private readonly ProductContext context;
 ```
