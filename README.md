@@ -449,7 +449,8 @@ public IActionResult Create([FromBody] Product item) {
     // Inclui produto
     context.ProductItems.Add(item);
     context.SaveChanges();
-
+    
+    // Retorna response, adicionando parâmetro Location com a URL do novo recurso criado
     return CreatedAtRoute("GetProduct", new { id = item.ProductID }, item);
 }
 ```
@@ -461,3 +462,30 @@ O método ```CreatedAtRoute```:
 * Retorna o código de resposta **201**, código padrão para solicitações **HTTP POST** que criam um novo recurso no servidor.
 * Adiciona o parâmetro ```Location``` no header da resposta. O parâmetro ```Location``` especifica a URI do novo recurso criado.
 * Utiliza o parâmetro rota nomeado **"GetProduct"** para gerar URL. O parâmetro nomeadp **"GetProduct"** foi definido no método ```GetById``` da classe ```ProductController```:
+
+#### Delete
+
+Inclua o método ```Delete``` na classe ```ProductController```, conforme definido abaixo:
+
+```C#
+/// <summary>
+/// Exclui um determinado produto
+/// </summary>
+/// <param name="id"></param>
+/// <returns></returns>
+[HttpDelete("{id}")]
+public IActionResult Delete(long id) {
+    // Busca produto pelo ID
+    var item = context.ProductItems.Find(id);
+    if (item == null) {
+        return NotFound();
+    }
+
+    // Remove produto e confirma operação
+    context.ProductItems.Remove(item);
+    context.SaveChanges();
+
+    // Retorna response
+    return NoContent();
+}
+```
