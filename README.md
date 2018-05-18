@@ -463,6 +463,47 @@ O método ```CreatedAtRoute```:
 * Adiciona o parâmetro ```Location``` no header da resposta. O parâmetro ```Location``` especifica a URI do novo recurso criado.
 * Utiliza o parâmetro rota nomeado **"GetProduct"** para gerar URL. O parâmetro nomeadp **"GetProduct"** foi definido no método ```GetById``` da classe ```ProductController```:
 
+#### Update
+
+Inclua o método ```Update``` na classe ```ProductController```, conforme definido abaixo:
+
+```C#
+/// <summary>
+/// Altera um determinado produto
+/// </summary>
+/// <param name="id"></param>
+/// <param name="item"></param>
+/// <returns></returns>
+[HttpPut("{id}")]
+public IActionResult Update(long id, [FromBody] Product item) {
+    // Caso id não seja igual ao id do produto 
+    if (item == null || item.ProductID != id) {
+        return BadRequest();
+    }
+
+    // Busca produto pelo ID
+    var product = context.ProductItems.Find(id);
+    if (product == null) {
+        return NotFound();
+    }
+
+    // Atualiza objeto produto
+    product.ProductCode = item.ProductCode;
+    product.Name        = item.Name;
+    product.Quantity    = item.Quantity;
+    product.Price       = item.Price;
+
+    // Altera produto e confirma operação
+    context.ProductItems.Update(product);
+    context.SaveChanges();
+
+    // Retorna response
+    return NoContent();
+}
+```
+
+O método ```Update```é similiar ao ```Create```, exceto pelo fato de usar o método **HTTP PUT** e retornar [204 (No Content)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html), definindo que não será incluído a representação do recurso na resposta. De acordo com a especificação HTTP o cliente **deve** encaminhar no corpo do request a **representação inteira do recurso** que será alterado.
+
 #### Delete
 
 Inclua o método ```Delete``` na classe ```ProductController```, conforme definido abaixo:
@@ -489,3 +530,11 @@ public IActionResult Delete(long id) {
     return NoContent();
 }
 ```
+
+O método retorna o código de resposta [204 (No Content)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) definindo que a resposta **não inclui** no corpo a representação do recurso.
+
+## Usando o aplicativo [Postman](https://www.getpostman.com/) para testar as operações CRUD
+
+O Postman é um **Editor de API** que permite realizar as seguintes operações:
+
+![Postman Operations](images/7.png)
