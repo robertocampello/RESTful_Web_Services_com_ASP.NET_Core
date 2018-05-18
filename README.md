@@ -197,7 +197,7 @@ Tendo o projeto criado você pode pressionar **CTRL+F5** para iniciar a aplicaç
 ["value1","value2"]
 ```
 
-### Adicionando a Classe Model
+## Adicionando a Classe Model
 
 Um modelo é um objeto que representa os dados na aplicação. Neste tutorial, teremos somente a classe modelo produto. Na **Solution Explorer**, clique com o botão direito do mouse no projeto e selecione **Add > New Folder**. Defina *Models* para o nome da pasta.
 
@@ -426,7 +426,7 @@ No método ```GetById``` da classe ```ProductController``` é retornado **NotFou
 
 Podemos testar o que já foi desenvolvido até aqui, considerando os métodos ```GetXXX```. Para isto basta, pressionar **CTRL+F5** no Visual Studio para iniciar aplicação. O Visual Studio irá iniciar o browser e acessará a URL ```http://localhost:<port>/api/values```, onde ```<port>``` será uma porta definida randomicamente. Para executar o método que retorna todos os produtos acesse a URL ```http://localhost:<port>/api/products```.
 
-### Implementando as demias operações CRUD
+### Implementando as demais operações CRUD
 
 Vamos agora implementar as **demais operações CRUD** ```Create```, ```Delete``` e ```Update```.
 
