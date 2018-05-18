@@ -351,7 +351,7 @@ public List<Product> GetAll() {
 /// </summary>
 /// <param name="id"></param>
 /// <returns></returns>
-[HttpGet("{id}")]
+[HttpGet("{id}", Name = "GetProduct"))]
 public IActionResult GetById(int id) {
     var item = context.ProductItems.Find(id);
     if (item == null) {
@@ -380,7 +380,7 @@ Abaixo é demonstrado um exemplo de uma resposta HTTP para o método ```GetAll``
 ]
 ```
 
-Mais demonstraremos como podemos visualizar uma resposta HTTP com [Postman](https://www.getpostman.com/) ou [curl](https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/curl.1.html).
+Mais a frente, demonstraremos como podemos visualizar uma resposta HTTP com [Postman](https://www.getpostman.com/) ou [curl](https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/curl.1.html).
 
 ### Rotas e URL paths
 
@@ -409,4 +409,42 @@ No método ```GetById``` da classe ```ProductController``` é retornado **NotFou
 ### Testando a aplicação
 
 Podemos testar o que já foi desenvolvido até aqui, considerando os métodos ```GetXXX```. Para isto basta, pressionar **CTRL+F5** no Visual Studio para iniciar aplicação. O Visual Studio irá iniciar o browser e acessará a URL ```http://localhost:<port>/api/values```, onde ```<port>``` será uma porta definida randomicamente. Para executar o método que retorna todos os produtos acesse a URL ```http://localhost:<port>/api/products```.
+
+### Implementando as demias operações CRUD
+
+Vamos agora implementar as demais operações CRUD ```Create```, ```Delete``` e ``Update```.
+
+#### Create
+
+Inclua o método ```Create``` na classe ```ProductController```, conforme definido abaixo:
+
+```C#
+/// <summary>
+/// Inclui um determinado produto no BD
+/// </summary>
+/// <param name="item"></param>
+/// <returns></returns>
+[HttpPost]
+public IActionResult Create([FromBody] Product item) {
+    if (item == null) {
+        return BadRequest();
+    }
+
+    // Inclui produto
+    context.ProductItems.Add(item);
+    context.SaveChanges();
+
+    return CreatedAtRoute("GetProduct", new { id = item.ProductID }, item);
+}
+```
+
+O atributo ```[HttpPost]``` define que o método responde a uma solicitação **HTTP POST**. O atributo ```[FromBody]``` pede ao MVC para obter o parâmetros do **request e carregá-los** no parâmetro ```item```.
+
+O método ```CreatedAtRoute```:
+
+* Retorna o código de resposta 201, código padrão para solicitações HTTP POST que criam um novo recurso no servidor.
+* Adds a Location header to the response. The Location header specifies the URI of the newly created to-do item. See 10.2.2 201 Created.
+* Uses the "GetTodo" named route to create the URL. The "GetTodo" named route is defined in GetById:
+
+
 
