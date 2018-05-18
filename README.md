@@ -396,7 +396,16 @@ namespace ProductAPI.Controllers
 ```
 
 * Substitua ```[controller]``` pelo nome da classe controller sem a palavra "Controller". No nosso exemplo a classe controller é ```ProductController``` e o root name é ```product```. ASP.NET Core [routing](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-2.0) é case insensitive.
-* Se o atributo ```[HttpGet]``` definir uma rota como (```[HttpGet("/products")```], Não será mais considerado o valor definido no atributo ```Route```. Para maiores detalhes veja [Attribute routing with Http[Verb] attributes](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-2.0#attribute-routing-with-httpverb-attributes).
+* Se o atributo ```[HttpGet]``` definir uma rota como (```[HttpGet("/products")```], Não será mais considerado o valor definido no atributo ```Route```. Para maiores detalhes veja: [Attribute routing with Http[Verb] attributes](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-2.0#attribute-routing-with-httpverb-attributes).
+* O parâmetro ```Name```definido no atributo ```[HttpGet]```, permite gerar a URL de acesso ao método, através do nome definido no parâmetro.
+
+```C#
+[HttpGet("{id}", Name = "GetProduct")]
+public IActionResult GetById(int id) {
+    var item = context.ProductItems.Find(id);
+    ...
+}
+```
 
 ### Retornando valores
 
