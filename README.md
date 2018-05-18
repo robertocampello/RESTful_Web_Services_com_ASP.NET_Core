@@ -559,5 +559,7 @@ Abra o aplicativo **Postman** instalado e siga os passos abaixo para **criar uma
   
 6. Clique no botão **Send**.
 
-  ![Postman Request Create](images/9.png)
+A figura abaixo demonstra a execução do método **HTTP POST Create** através do **Postman**.
+
+![Postman Request Create](images/9.png)
 
