@@ -197,7 +197,7 @@ Tendo o projeto criado você pode pressionar **CTRL+F5** para iniciar a aplicaç
 ["value1","value2"]
 ```
 
-### Adicionando a Classe Model
+## Adicionando a Classe Model
 
 Um modelo é um objeto que representa os dados na aplicação. Neste tutorial, teremos somente a classe modelo produto. Na **Solution Explorer**, clique com o botão direito do mouse no projeto e selecione **Add > New Folder**. Defina *Models* para o nome da pasta.
 
@@ -228,7 +228,7 @@ namespace ProductAPI.Models
 }
 ```
 
-### Criando o Database Context
+## Criando o Database Context
 
 O database context é a classe main que coordena as operações do [Entity Framework](https://docs.microsoft.com/en-us/ef/) para um dado modelo de dados. A classe deve estender da classe ```Microsoft.EntityFrameworkCore.DbContext```.
 
@@ -257,7 +257,7 @@ namespace ProductAPI.Models
 }
 ```
 
-### Registrando o Database Context
+## Registrando o Database Context
 
 Neste passo, nós iremos registrar o database context com o container de [injeção de dependência](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-2.1). Serviços (como DB context) que são registrados com **dependency injection (DI) container** ficam disponíveis para os objetos controller.
 
@@ -297,7 +297,7 @@ namespace ProductAPI
 }
 ```
 
-### Criando a classe Controller 
+## Criando a classe Controller 
 
 Na Solution Explorer, clique com o botão direito na pasta *Controllers* e selecione **Add > New Item**. Na caixa de diálogo apresentada, selecione o template **API Controller - Empty**. Defina ```ProductController``` para o nome da classe e pressione **Add**.
 
@@ -332,7 +332,7 @@ Usando este template a classe é criada sem métodos. Nas próximas seções nó
 O construtor da classe usa [Dependency Injection](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-2.0) para injetar o database context ```ProductContext``` no atributo context da controller. 
 O database context é usado em cada **método CRUD** da controller. O construtor adiciona um item no database memory, caso não exista.
 
-### Obtendo itens de produto
+## Obtendo itens de produto
 
 Para obter um **produto através do ID** ou uma **lista de produtos**, inclua os seguintes métodos na classe ```ProductController```:
 
@@ -351,7 +351,7 @@ public List<Product> GetAll() {
 /// </summary>
 /// <param name="id"></param>
 /// <returns></returns>
-[HttpGet("{id}")]
+[HttpGet("{id}", Name = "GetProduct"))]
 public IActionResult GetById(int id) {
     var item = context.ProductItems.Find(id);
     if (item == null) {
@@ -361,12 +361,12 @@ public IActionResult GetById(int id) {
 }
 ```
 
-Esses métodos implementam os **métodos GET**:
+Os métodos definidos acima implementam os **métodos HTTP GET**:
 
 * ```GET /api/products```
 * ```GET /api/products/{id}```
 
-Abaixo é demonstrado um exemplo de uma resposta HTTP para o método ```GetAll```:
+Abaixo é demonstrado um exemplo de uma **resposta HTTP** para o método ```GetAll```:
 
 ```json
 [
@@ -380,9 +380,9 @@ Abaixo é demonstrado um exemplo de uma resposta HTTP para o método ```GetAll``
 ]
 ```
 
-Mais demonstraremos como podemos visualizar uma resposta HTTP com [Postman](https://www.getpostman.com/) ou [curl](https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/curl.1.html).
+Mais a frente, demonstraremos como podemos visualizar uma resposta HTTP com [Postman](https://www.getpostman.com/) ou [curl](https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/curl.1.html).
 
-### Rotas e URL paths
+## Rotas e URL paths
 
 O atributo ```[HttpGet]``` define que o método responde a uma solicitação **HTTP GET**. A URL para cada método pode ser definida através do atributo ```Route``` definido na classe, conforme demonstrado abaixo:
 
@@ -396,9 +396,25 @@ namespace ProductAPI.Controllers
 ```
 
 * Substitua ```[controller]``` pelo nome da classe controller sem a palavra "Controller". No nosso exemplo a classe controller é ```ProductController``` e o root name é ```product```. ASP.NET Core [routing](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-2.0) é case insensitive.
-* Se o atributo ```[HttpGet]``` definir uma rota como (```[HttpGet("/products")```], Não será mais considerado o valor definido no atributo ```Route```. Para maiores detalhes veja [Attribute routing with Http[Verb] attributes](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-2.0#attribute-routing-with-httpverb-attributes).
+* Se o atributo ```[HttpGet]``` definir uma rota como (```[HttpGet("/products")```], Não será mais considerado o valor definido no atributo ```Route```. Para maiores detalhes veja: [Attribute routing with Http[Verb] attributes](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-2.0#attribute-routing-with-httpverb-attributes).
+* O parâmetro ```Name```definido no atributo ```[HttpGet]```, permite gerar a URL de acesso ao método, através do nome definido no parâmetro.
 
-### Retornando valores
+  ```C#
+  [HttpGet("{id}", Name = "GetProduct")]
+  public IActionResult GetById(int id) {
+      var item = context.ProductItems.Find(id);
+      ...
+  }
+  ```
+
+  Gerando a **URL** através do **nome da Rota**:
+
+  ```C#
+  // Gerando URL atrvés do nome da rota
+  Url.RouteUrl("GetProduct");
+  ```
+
+## Retornando valores
 
 O método ```GetAll```retorna uma coleção de objetos ```Product```. A framework MVC automaticamente serializa o objeto [JSON](https://www.json.org/) e escreve no corpo da resposta. O código de resposta para este método é o **200**, assumindo que não ocorra nenhuma exception. Exceções não tratadas são convertidas em erros **5xx**.
 
@@ -406,7 +422,119 @@ Já o método ```GetById``` retorna um objeto do tipo [IActionResult](https://do
 
 No método ```GetById``` da classe ```ProductController``` é retornado **NotFound (404)** caso não seja encontrado um produto com o código informado. Em caso de sucesso é retornado o código **200** com a representação JSON no corpo da resposta.
 
-### Testando a aplicação
+## Testando a aplicação
 
 Podemos testar o que já foi desenvolvido até aqui, considerando os métodos ```GetXXX```. Para isto basta, pressionar **CTRL+F5** no Visual Studio para iniciar aplicação. O Visual Studio irá iniciar o browser e acessará a URL ```http://localhost:<port>/api/values```, onde ```<port>``` será uma porta definida randomicamente. Para executar o método que retorna todos os produtos acesse a URL ```http://localhost:<port>/api/products```.
 
+## Implementando as demais operações CRUD
+
+Vamos agora implementar as **demais operações CRUD** ```Create```, ```Delete``` e ```Update```.
+
+#### Create
+
+Inclua o método ```Create``` na classe ```ProductController```, conforme definido abaixo:
+
+```C#
+/// <summary>
+/// Inclui um determinado produto no BD
+/// </summary>
+/// <param name="item"></param>
+/// <returns></returns>
+[HttpPost]
+public IActionResult Create([FromBody] Product item) {
+    if (item == null) {
+        return BadRequest();
+    }
+
+    // Inclui produto
+    context.ProductItems.Add(item);
+    context.SaveChanges();
+    
+    // Retorna response, adicionando parâmetro Location com a URL do novo recurso criado
+    return CreatedAtRoute("GetProduct", new { id = item.ProductID }, item);
+}
+```
+
+O atributo ```[HttpPost]``` define que o método responde a uma solicitação **HTTP POST**. O atributo ```[FromBody]``` pede ao MVC para obter o parâmetros do **request e carregá-los** no parâmetro ```item```.
+
+O método ```CreatedAtRoute```:
+
+* Retorna o código de resposta **201**, código padrão para solicitações **HTTP POST** que criam um novo recurso no servidor.
+* Adiciona o parâmetro ```Location``` no header da resposta. O parâmetro ```Location``` especifica a URI do novo recurso criado.
+* Utiliza o parâmetro rota nomeado **"GetProduct"** para gerar URL. O parâmetro nomeadp **"GetProduct"** foi definido no método ```GetById``` da classe ```ProductController```:
+
+#### Update
+
+Inclua o método ```Update``` na classe ```ProductController```, conforme definido abaixo:
+
+```C#
+/// <summary>
+/// Altera um determinado produto
+/// </summary>
+/// <param name="id"></param>
+/// <param name="item"></param>
+/// <returns></returns>
+[HttpPut("{id}")]
+public IActionResult Update(long id, [FromBody] Product item) {
+    // Caso id não seja igual ao id do produto 
+    if (item == null || item.ProductID != id) {
+        return BadRequest();
+    }
+
+    // Busca produto pelo ID
+    var product = context.ProductItems.Find(id);
+    if (product == null) {
+        return NotFound();
+    }
+
+    // Atualiza objeto produto
+    product.ProductCode = item.ProductCode;
+    product.Name        = item.Name;
+    product.Quantity    = item.Quantity;
+    product.Price       = item.Price;
+
+    // Altera produto e confirma operação
+    context.ProductItems.Update(product);
+    context.SaveChanges();
+
+    // Retorna response
+    return NoContent();
+}
+```
+
+O método ```Update```é similiar ao ```Create```, exceto pelo fato de usar o método **HTTP PUT** e retornar [204 (No Content)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html), definindo que não será incluído a representação do recurso na resposta. De acordo com a especificação HTTP o cliente **deve** encaminhar no corpo do request a **representação inteira do recurso** que será alterado.
+
+#### Delete
+
+Inclua o método ```Delete``` na classe ```ProductController```, conforme definido abaixo:
+
+```C#
+/// <summary>
+/// Exclui um determinado produto
+/// </summary>
+/// <param name="id"></param>
+/// <returns></returns>
+[HttpDelete("{id}")]
+public IActionResult Delete(long id) {
+    // Busca produto pelo ID
+    var item = context.ProductItems.Find(id);
+    if (item == null) {
+        return NotFound();
+    }
+
+    // Remove produto e confirma operação
+    context.ProductItems.Remove(item);
+    context.SaveChanges();
+
+    // Retorna response
+    return NoContent();
+}
+```
+
+O método retorna o código de resposta [204 (No Content)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) definindo que a resposta **não inclui** no corpo a representação do recurso.
+
+## Usando o aplicativo [Postman](https://www.getpostman.com/) para testar as operações CRUD
+
+O Postman é um **Editor de API** que permite realizar as seguintes operações:
+
+![Postman Operations](images/8.png)
