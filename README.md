@@ -536,7 +536,7 @@ O método retorna o código de resposta [204 (No Content)](https://www.w3.org/Pr
 
 ## Usando o aplicativo [Postman](https://www.getpostman.com/) para testar as operações CRUD
 
-O Postman é um **Editor de API** que permite realizar as seguintes operações:
+O Postman é um **Editor de API** que permite realizar operações como:
 
 ![Postman Operations](images/8.png)
 
