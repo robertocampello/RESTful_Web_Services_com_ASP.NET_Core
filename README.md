@@ -458,6 +458,6 @@ O atributo ```[HttpPost]``` define que o método responde a uma solicitação **
 
 O método ```CreatedAtRoute```:
 
-* Retorna o código de resposta **201**, código padrão para solicitações HTTP POST que criam um novo recurso no servidor.
-* Adiciona o parâmetro ```Location``` no header da resposta. O parâmetro Location especifica a URI do novo recurso criado.
+* Retorna o código de resposta **201**, código padrão para solicitações **HTTP POST** que criam um novo recurso no servidor.
+* Adiciona o parâmetro ```Location``` no header da resposta. O parâmetro ```Location``` especifica a URI do novo recurso criado.
 * Utiliza o parâmetro rota nomeado **"GetProduct"** para gerar URL. O parâmetro nomeadp **"GetProduct"** foi definido no método ```GetById``` da classe ```ProductController```:
