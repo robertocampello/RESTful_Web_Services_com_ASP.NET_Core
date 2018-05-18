@@ -228,7 +228,7 @@ namespace ProductAPI.Models
 }
 ```
 
-### Criando o Database Context
+## Criando o Database Context
 
 O database context é a classe main que coordena as operações do [Entity Framework](https://docs.microsoft.com/en-us/ef/) para um dado modelo de dados. A classe deve estender da classe ```Microsoft.EntityFrameworkCore.DbContext```.
 
@@ -257,7 +257,7 @@ namespace ProductAPI.Models
 }
 ```
 
-### Registrando o Database Context
+## Registrando o Database Context
 
 Neste passo, nós iremos registrar o database context com o container de [injeção de dependência](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-2.1). Serviços (como DB context) que são registrados com **dependency injection (DI) container** ficam disponíveis para os objetos controller.
 
@@ -297,7 +297,7 @@ namespace ProductAPI
 }
 ```
 
-### Criando a classe Controller 
+## Criando a classe Controller 
 
 Na Solution Explorer, clique com o botão direito na pasta *Controllers* e selecione **Add > New Item**. Na caixa de diálogo apresentada, selecione o template **API Controller - Empty**. Defina ```ProductController``` para o nome da classe e pressione **Add**.
 
@@ -332,7 +332,7 @@ Usando este template a classe é criada sem métodos. Nas próximas seções nó
 O construtor da classe usa [Dependency Injection](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-2.0) para injetar o database context ```ProductContext``` no atributo context da controller. 
 O database context é usado em cada **método CRUD** da controller. O construtor adiciona um item no database memory, caso não exista.
 
-### Obtendo itens de produto
+## Obtendo itens de produto
 
 Para obter um **produto através do ID** ou uma **lista de produtos**, inclua os seguintes métodos na classe ```ProductController```:
 
@@ -382,7 +382,7 @@ Abaixo é demonstrado um exemplo de uma **resposta HTTP** para o método ```GetA
 
 Mais a frente, demonstraremos como podemos visualizar uma resposta HTTP com [Postman](https://www.getpostman.com/) ou [curl](https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/curl.1.html).
 
-### Rotas e URL paths
+## Rotas e URL paths
 
 O atributo ```[HttpGet]``` define que o método responde a uma solicitação **HTTP GET**. A URL para cada método pode ser definida através do atributo ```Route``` definido na classe, conforme demonstrado abaixo:
 
@@ -414,7 +414,7 @@ namespace ProductAPI.Controllers
   Url.RouteUrl("GetProduct");
   ```
 
-### Retornando valores
+## Retornando valores
 
 O método ```GetAll```retorna uma coleção de objetos ```Product```. A framework MVC automaticamente serializa o objeto [JSON](https://www.json.org/) e escreve no corpo da resposta. O código de resposta para este método é o **200**, assumindo que não ocorra nenhuma exception. Exceções não tratadas são convertidas em erros **5xx**.
 
@@ -422,11 +422,11 @@ Já o método ```GetById``` retorna um objeto do tipo [IActionResult](https://do
 
 No método ```GetById``` da classe ```ProductController``` é retornado **NotFound (404)** caso não seja encontrado um produto com o código informado. Em caso de sucesso é retornado o código **200** com a representação JSON no corpo da resposta.
 
-### Testando a aplicação
+## Testando a aplicação
 
 Podemos testar o que já foi desenvolvido até aqui, considerando os métodos ```GetXXX```. Para isto basta, pressionar **CTRL+F5** no Visual Studio para iniciar aplicação. O Visual Studio irá iniciar o browser e acessará a URL ```http://localhost:<port>/api/values```, onde ```<port>``` será uma porta definida randomicamente. Para executar o método que retorna todos os produtos acesse a URL ```http://localhost:<port>/api/products```.
 
-### Implementando as demais operações CRUD
+## Implementando as demais operações CRUD
 
 Vamos agora implementar as **demais operações CRUD** ```Create```, ```Delete``` e ```Update```.
 
