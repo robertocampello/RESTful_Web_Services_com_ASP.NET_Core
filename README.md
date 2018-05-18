@@ -548,14 +548,14 @@ Abra o aplicativo **Postman** instalado e siga os passos abaixo para **criar uma
 4. Selecione o tipo *JSON (application/json)*.
 5. Inclua a **representação JSON** conforme definido abaixo:
   
-  ```JSON
-  {
-      "productCode": "Product Code 2",
-      "name": "Product Item 2",
-      "quantity": 10,
-      "price": 250.55
-  }
-  ```
+    ```JSON
+    {
+        "productCode": "Product Code 2",
+        "name": "Product Item 2",
+        "quantity": 10,
+        "price": 250.55
+    }
+    ```
   
 6. Clique no botão **Send**.
 
