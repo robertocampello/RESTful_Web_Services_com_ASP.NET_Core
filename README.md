@@ -407,6 +407,13 @@ public IActionResult GetById(int id) {
 }
 ```
 
+Gerando a **URL** através do **nome da Rota**:
+
+```C#
+// Gerando URL atrvés do nome da rota
+Url.RouteUrl("GetProduct");
+```
+
 ### Retornando valores
 
 O método ```GetAll```retorna uma coleção de objetos ```Product```. A framework MVC automaticamente serializa o objeto [JSON](https://www.json.org/) e escreve no corpo da resposta. O código de resposta para este método é o **200**, assumindo que não ocorra nenhuma exception. Exceções não tratadas são convertidas em erros **5xx**.
@@ -452,8 +459,5 @@ O atributo ```[HttpPost]``` define que o método responde a uma solicitação **
 O método ```CreatedAtRoute```:
 
 * Retorna o código de resposta 201, código padrão para solicitações HTTP POST que criam um novo recurso no servidor.
-* Adds a Location header to the response. The Location header specifies the URI of the newly created to-do item. See 10.2.2 201 Created.
-* Uses the "GetTodo" named route to create the URL. The "GetTodo" named route is defined in GetById:
-
-
-
+* Adiciona o parâmetro ```Location``` no header da resposta. O parâmetro Location especifica a URI do novo recurso criado.
+* Utiliza o parâmetro rota nomeado **"GetProduct"** para gerar URL. O parâmetro nomeadp **"GetProduct"** foi definido no método ```GetById``` da classe ```ProductController```:
