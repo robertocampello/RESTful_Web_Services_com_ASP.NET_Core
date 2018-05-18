@@ -399,20 +399,20 @@ namespace ProductAPI.Controllers
 * Se o atributo ```[HttpGet]``` definir uma rota como (```[HttpGet("/products")```], Não será mais considerado o valor definido no atributo ```Route```. Para maiores detalhes veja: [Attribute routing with Http[Verb] attributes](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-2.0#attribute-routing-with-httpverb-attributes).
 * O parâmetro ```Name```definido no atributo ```[HttpGet]```, permite gerar a URL de acesso ao método, através do nome definido no parâmetro.
 
-```C#
-[HttpGet("{id}", Name = "GetProduct")]
-public IActionResult GetById(int id) {
-    var item = context.ProductItems.Find(id);
-    ...
-}
-```
+  ```C#
+  [HttpGet("{id}", Name = "GetProduct")]
+  public IActionResult GetById(int id) {
+      var item = context.ProductItems.Find(id);
+      ...
+  }
+  ```
 
-Gerando a **URL** através do **nome da Rota**:
+  Gerando a **URL** através do **nome da Rota**:
 
-```C#
-// Gerando URL atrvés do nome da rota
-Url.RouteUrl("GetProduct");
-```
+  ```C#
+  // Gerando URL atrvés do nome da rota
+  Url.RouteUrl("GetProduct");
+  ```
 
 ### Retornando valores
 
@@ -428,7 +428,7 @@ Podemos testar o que já foi desenvolvido até aqui, considerando os métodos ``
 
 ### Implementando as demias operações CRUD
 
-Vamos agora implementar as demais operações CRUD ```Create```, ```Delete``` e ``Update```.
+Vamos agora implementar as **demais operações CRUD** ```Create```, ```Delete``` e ```Update```.
 
 #### Create
 
@@ -458,6 +458,6 @@ O atributo ```[HttpPost]``` define que o método responde a uma solicitação **
 
 O método ```CreatedAtRoute```:
 
-* Retorna o código de resposta 201, código padrão para solicitações HTTP POST que criam um novo recurso no servidor.
+* Retorna o código de resposta **201**, código padrão para solicitações HTTP POST que criam um novo recurso no servidor.
 * Adiciona o parâmetro ```Location``` no header da resposta. O parâmetro Location especifica a URI do novo recurso criado.
 * Utiliza o parâmetro rota nomeado **"GetProduct"** para gerar URL. O parâmetro nomeadp **"GetProduct"** foi definido no método ```GetById``` da classe ```ProductController```:
