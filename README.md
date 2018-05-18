@@ -361,12 +361,12 @@ public IActionResult GetById(int id) {
 }
 ```
 
-Esses métodos implementam os **métodos GET**:
+Os métodos definidos acima implementam os **métodos HTTP GET**:
 
 * ```GET /api/products```
 * ```GET /api/products/{id}```
 
-Abaixo é demonstrado um exemplo de uma resposta HTTP para o método ```GetAll```:
+Abaixo é demonstrado um exemplo de uma **resposta HTTP** para o método ```GetAll```:
 
 ```json
 [
