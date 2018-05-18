@@ -177,7 +177,8 @@ O diagrama demonstra o desenho basico da aplicação
 ## Pré-Requisitos
 
 1. Instalar o [Visual Studio](https://www.microsoft.com/net/download/windows) – Pode ser o community 
-2. Ter conhecimento no desenvolvimento **Web ASP.NET** e **.NET Core cross-platform**
+2. Instalar o {Postman App](https://www.getpostman.com/apps) - Editor de API que permite testar as operações REST
+3. Ter conhecimento no desenvolvimento **Web ASP.NET** e **.NET Core cross-platform**
 
 ## Criando o projeto
 
@@ -538,3 +539,23 @@ O método retorna o código de resposta [204 (No Content)](https://www.w3.org/Pr
 O Postman é um **Editor de API** que permite realizar as seguintes operações:
 
 ![Postman Operations](images/8.png)
+
+Abra o aplicativo **Postman** instalado e siga os passos abaixo para **criar uma solicitação** ```Create``` Product:
+
+1. Na **New Tab** selecione a opção POST na combo e inclua a seguinte URL: ```http://localhost:<port>/api/products```. ```<port>```deve corresponder ao número de porta gerada para o seu servidor.
+2. Clique na **tab Body**.
+3. Selecione o **radio button raw**.
+4. Selecione o tipo *JSON (application/json)*.
+5. Inclua a **representação JSON** conforme definido abaixo:
+  ```JSON
+  {
+      "productCode": "Product Code 2",
+      "name": "Product Item 2",
+      "quantity": 10,
+      "price": 250.55
+  }
+  ```
+6. Clique no botão **Send**.
+
+![Postman Request Create](images/9.png)
+
