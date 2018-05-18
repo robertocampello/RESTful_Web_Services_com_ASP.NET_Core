@@ -547,6 +547,7 @@ Abra o aplicativo **Postman** instalado e siga os passos abaixo para **criar uma
 3. Selecione o **radio button raw**.
 4. Selecione o tipo *JSON (application/json)*.
 5. Inclua a **representação JSON** conforme definido abaixo:
+
   ```JSON
   {
       "productCode": "Product Code 2",
@@ -557,5 +558,5 @@ Abra o aplicativo **Postman** instalado e siga os passos abaixo para **criar uma
   ```
 6. Clique no botão **Send**.
 
-![Postman Request Create](images/9.png)
+  ![Postman Request Create](images/9.png)
 
