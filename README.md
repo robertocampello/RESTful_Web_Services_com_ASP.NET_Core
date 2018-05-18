@@ -537,4 +537,4 @@ O método retorna o código de resposta [204 (No Content)](https://www.w3.org/Pr
 
 O Postman é um **Editor de API** que permite realizar as seguintes operações:
 
-![Postman Operations](images/7.png)
+![Postman Operations](images/8.png)
