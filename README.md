@@ -418,9 +418,13 @@ namespace ProductAPI.Controllers
 
 O método ```GetAll```retorna uma coleção de objetos ```Product```. A framework MVC automaticamente serializa o objeto [JSON](https://www.json.org/) e escreve no corpo da resposta. O código de resposta para este método é o **200**, assumindo que não ocorra nenhuma exception. Exceções não tratadas são convertidas em erros **5xx**.
 
-O método ```GetById``` retorna um objeto do tipo [IActionResult](https://docs.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-2.0#iactionresult-type) necessário quando há necessidade de retornar **mais de um tipo de retorno**. Mais a frente veremos que através de um objeto ```ObjectResult é possível implementar **Content Negotiation**.
+O método ```GetById``` retorna um objeto do tipo [IActionResult](https://docs.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-2.0#iactionresult-type) necessário quando há necessidade de retornar **mais de um tipo de retorno**. 
 
 No método ```GetById``` da classe ```ProductController``` é retornado **NotFound (404)** caso não seja encontrado um produto com o código informado. Em caso de sucesso é retornado o código **200** com a representação JSON no corpo da resposta.
+
+## Tipos de Retorno Controlle Action
+
+**ASP.NET Core** oferece as seguintes opções para **tipos de retorno** nos métodos action controller:
 
 ## Testando a aplicação
 
