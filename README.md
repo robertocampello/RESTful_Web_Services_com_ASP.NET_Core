@@ -418,9 +418,18 @@ namespace ProductAPI.Controllers
 
 O método ```GetAll```retorna uma coleção de objetos ```Product```. A framework MVC automaticamente serializa o objeto [JSON](https://www.json.org/) e escreve no corpo da resposta. O código de resposta para este método é o **200**, assumindo que não ocorra nenhuma exception. Exceções não tratadas são convertidas em erros **5xx**.
 
-O método ```GetById``` retorna um objeto do tipo [IActionResult](https://docs.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-2.0#iactionresult-type) necessário quando há necessidade de retornar **mais de um tipo de retorno**. O método possui **dois tipos** de retorno possíveis:
+O método ```GetById``` retorna um objeto que implementa [IActionResult](https://docs.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-2.0#iactionresult-type) necessário quando há necessidade de retornar **mais de um tipo de retorno**. O método possui **dois tipos** de retorno possíveis:
 
-* **NotFound(404)** caso não seja encontrado um produto com o código informado e em caso de sucesso é retornado [OkObjectResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.okobjectresult?view=aspnetcore-2.0)(**200**) com a representação JSON no corpo da resposta.
+* [NotFoundResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.notfoundresult?view=aspnetcore-2.0)(**404**) caso **não seja encontrado** um produto com o código informado e em **caso de sucesso** é retornado [OkObjectResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.okobjectresult?view=aspnetcore-2.0)(**200**) com a representação JSON no corpo da resposta.
+
+A classe controller possui **métodos que retornam códigos de resposta HTTP**. Os mais comuns são:
+
+* **Ok()**:         Retorna 200 - Sucesso;
+* **NotContent()**: Retorna 204 - Sucesso. Sem conteúdo na resposta;
+* **BadRequest()**: Retorna 400 - Erro na solicitação;
+* **NotFound()**:   Retorna 404 - Recurso não encontrado;
+
+Exite também o método **StatusCode()** que permite retornar um código HTTP específico.
 
 ## Tipos de Retorno Controlle Action
 
