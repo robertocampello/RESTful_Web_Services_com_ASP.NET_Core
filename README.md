@@ -69,14 +69,13 @@ Um recurso pode ser representado através de diversos formatos, tais como ```XML
 </customer>
 ```
  
-O cliente sempre utiliza a representação do recurso para efetuar a comunicação com o cliente. Portanto, é um princípio de uma aplicação RESTful, prover o suporte a **múltiplas representações** em um serviço REST. Ao suportar apenas um tipo de formato, um serviço REST limita seus clientes, a utilizar uma única reprsentação disponível. É **recomendável** por boa prática prover representações pelo menos para os **três principais formatos**:
-* HTML
-* XML
+O cliente sempre utiliza a representação do recurso para efetuar a comunicação com o cliente. Portanto, é um princípio de uma aplicação RESTful, prover o suporte a **múltiplas representações** em um serviço REST. Ao suportar apenas um tipo de formato, um serviço REST limita seus clientes, a utilizar uma única reprsentação disponível. É **recomendável** por boa prática prover representações pelo menos para os **dois principais formatos**:
 * JSON
+* XML
 
 ### Utilize Content Negotiation para o suporte de múltiplas representações
 
-Como vimos no item anterior um serviço REST pode suportar múltiplas representações de recursos. Portanto, nesses casos é esperado que o cliente forneça o formato desejado a ser utilizado. No REST esta negociação é chamada de **Content Negotiation** e na solicitação Web é feita através de um cabeçalho HTTP definido como ```Accept```.
+Como vimos no item anterior um serviço REST pode suportar **múltiplas representações** de recursos. Portanto, nesses casos é esperado que o cliente forneça o formato desejado a ser utilizado. No REST esta negociação é chamada de **Content Negotiation** e na solicitação Web é feita através de um cabeçalho HTTP definido como ```Accept```.
 
 O cliente pode portanto, incluir no cabeçalho **Accept** da solicitação o formato desejado da representação do recurso. Entretanto, deve ser um formato suportado pelo serviço REST.
 
