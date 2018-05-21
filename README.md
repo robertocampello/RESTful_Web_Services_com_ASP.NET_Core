@@ -420,7 +420,7 @@ O **ASP.NET Core** permite **dois tipos de retorno** para o método action:
 
 * **Tipo Específico** - Um método action simples pode retornar um **tipo primitivo** ou um **tipo complexo** (por exemplo, ```string```, ou um objeto custom).
   
-* **IActionResult** - O tipo [IActionResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult?view=aspnetcore-2.0) é  apropriado quando múltiplos tipos de retorno [ActionResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.actionresult?view=aspnetcore-2.0) são possíveis para o método action.
+* **Tipo IActionResult** - O tipo [IActionResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult?view=aspnetcore-2.0) é  apropriado quando múltiplos tipos de retorno [ActionResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.actionresult?view=aspnetcore-2.0) são possíveis para o método action.
   
 O método ```GetAll```retorna uma coleção de objetos ```Product```. A framework MVC automaticamente serializa o objeto [JSON](https://www.json.org/) e escreve no corpo da resposta. O código de resposta para este método é o **200**, assumindo que não ocorra nenhuma exception. Exceções não tratadas são convertidas em erros **5xx**.
 
