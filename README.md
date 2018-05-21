@@ -5,7 +5,7 @@ Recentemente nos últimos anos, está cada vez mais claro que HTTP não é apena
 
 **REST (Representational State Transfer)** é um modelo de arquitetura que foi especificado por Roy Fielding, um dos principais criadores do protocolo HTTP em sua tese de doutorado, e foi adotado como o modelo de arquitetura a ser utilizado na evolução do protocolo HTTP.  Consiste em princípios, padões e constraints que, quando implementadas, permitem a criação de um projeto com interfaces bem definidas.
 
-O modelo proposto por Fielding permitiu uma forma muito simples e mais coesa, dando sentido às requisições HTTP, conforme exemplos:
+O modelo proposto por Fielding permitiu uma forma **muito simples** e **mais coesa**, dando sentido às requisições HTTP, conforme exemplos:
 
 * GET http://www.mydomain.com/users
 * POST http://www.mydomain.com/users/{name:jonh}
@@ -299,7 +299,7 @@ namespace ProductAPI
 
 ## Criando a classe Controller 
 
-Na Solution Explorer, clique com o botão direito na pasta *Controllers* e selecione **Add > New Item**. Na caixa de diálogo apresentada, selecione o template **API Controller - Empty**. Defina ```ProductController``` para o nome da classe e pressione **Add**.
+Na **Solution Explorer**, clique com o botão direito na pasta *Controllers* e selecione **Add > New Item**. Na caixa de diálogo apresentada, selecione o template **API Controller - Empty**. Defina ```ProductController``` para o nome da classe e pressione **Add**.
 
 ```C#
 using System.Linq;
@@ -416,7 +416,7 @@ namespace ProductAPI.Controllers
 
 ## Retornando valores
 
-O ASP.NET Core permite **dois tipos de retorno** para o método action:
+O **ASP.NET Core** permite **dois tipos de retorno** para o método action:
 
 * **Tipo Específico** - Um método action simples pode retornar um **tipo primitivo** ou um **tipo complexo** (por exemplo, ```string```, ou um objeto custom).
   
@@ -426,7 +426,7 @@ O método ```GetAll```retorna uma coleção de objetos ```Product```. A framewor
 
 O método ```GetById``` retorna um objeto que implementa [IActionResult](https://docs.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-2.0#iactionresult-type) necessário, pois temos **dois tipos** de retorno possíveis:
 
-* [NotFoundResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.notfoundresult?view=aspnetcore-2.0)(**404**) caso **não seja encontrado** um produto com o código informado e em **caso de sucesso** é retornado [OkObjectResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.okobjectresult?view=aspnetcore-2.0)(**200**) com a representação JSON no corpo da resposta.
+* [NotFoundResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.notfoundresult?view=aspnetcore-2.0)(**404**) caso **não seja encontrado** um produto com o código informado e [OkObjectResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.okobjectresult?view=aspnetcore-2.0)(**200**) em **caso de sucesso**. Ambos contendo a representação JSON no corpo da resposta.
 
 A classe controller possui **métodos helper que retornam códigos de resposta HTTP**. Os mais comuns são:
 
