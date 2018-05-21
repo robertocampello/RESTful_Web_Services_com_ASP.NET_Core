@@ -310,7 +310,7 @@ namespace ProductAPI.Controllers
 {
     [Produces("application/json")]
     [Route("api/products")]
-    public class ProductController : ControllerBase {
+    public class ProductController : Controller {
         private readonly ProductContext context;
 
         // Construtor da classe
@@ -428,7 +428,7 @@ O método ```GetById``` retorna um objeto que implementa [IActionResult](https:/
 
 * [NotFoundResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.notfoundresult?view=aspnetcore-2.0)(**404**) caso **não seja encontrado** um produto com o código informado e [OkObjectResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.okobjectresult?view=aspnetcore-2.0)(**200**) em **caso de sucesso**. Ambos contendo a representação JSON no corpo da resposta.
 
-A classe controller possui **métodos helper que retornam códigos de resposta HTTP**. Os mais comuns são:
+A classe controller possui **métodos helper** que estendem de ```ObjectResult``` e retornam códigos de resposta HTTP. Os mais comuns são:
 
 * **Ok()**:         Retorna 200 - **Sucesso**;
 * **NotContent()**: Retorna 204 - **Sucesso. Sem conteúdo na resposta**;
@@ -442,7 +442,7 @@ Exite também o método helper **StatusCode()** que permite retornar um **códig
 O **ASP.NET Core MVC** tem suporte integrado para **formatar** dados de resposta, através de **duas formas**:
 
 * **Formato Específico**
-* **Utilizando IActionResult**
+* **Formato IActionResult (Content Negotiation)**
 
 ### Formato Específico
 
@@ -450,9 +450,9 @@ Alguns tipos de retorno são específicos para um particular formato, como ```Js
 
 **Observação:** Uma action não requer um tipo de retorno específico. A framework MVC dá suporte para **qualquer tipo de retorno**. Se a action retornar um objeto do tipo ```IActionResult``` e a controller herdar da classe ```Controller```, você poderá utilizar **métodos helper** para auxiliar no retorno. Actions que retornem objetos que não são sejam ```IActionResult``` irão ser serializados usando o método de formatação definido na implementação ```IOutputFormatter```.
 
-#### Retornando ao formato JSON
+#### Retornando o formato JSON
 
-Se a sua classe herdar da classe base ```Controller```, utilize o método helper ```Json``` para retornar a representação no **formato JSON**. Conforme exemplo abaixo:
+Se a sua classe herdar da classe base ```Controller```, utilize o método helper ```Json``` para retornar a representação no **formato JSON**. Conforme definido abaixo:
 
 ```C#
 /// <summary>
@@ -468,6 +468,40 @@ public JsonResult Get() {
 Resposta para o método action ```Get``` definido acima:
 
 ![Response GET Json](images/10.png)
+
+Observe que mesmo a solicitação definindo o parâmetro header ```Accept``` como **application/xml** a resposta foi formatada com a represetação **application/json**, pois neste caso o tipo foi específico.
+
+Para retornar o formato **plain text**, você deve retornar ```ContentResult``` e utilizar o método helper ```Content```, conforme definido abaixo:
+
+```C#
+// GET api/products/about
+[HttpGet("About")]
+public ContentResult About() {
+    return Content("An API listing products of docs.asp.net.");
+}
+```
+
+#### Formato IActionResult (Content Negotiation)
+
+Content negotiation ocorre quando o cliente específica o formato a ser utilizado na resposta através do parâmetro header [Accept](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html). O formato padrão utilizado pelo **ASP.NET Core MVC** é o **JSON**, caso o cliente não solicite um formato específico. Content negotiation é implementado atarvés do objeto ```ObjectResult```. A classe controller possui métodos helper que estendem de ```ObjectResult```.
+
+Abaixo o exemplo do método ```GetById``` da classe ```ProductController```:
+
+```C#
+/// <summary>
+/// Retorna um produto através do ID
+/// </summary>
+/// <param name="id"></param>
+/// <returns></returns>
+[HttpGet("{id}", Name = "GetProduct")]
+public IActionResult GetById(int id) {
+    var item = context.ProductItems.Find(id);
+    if (item == null) {
+        return NotFound();
+    }
+    return Ok(item);
+}
+```
 
 ## Testando a aplicação
 
