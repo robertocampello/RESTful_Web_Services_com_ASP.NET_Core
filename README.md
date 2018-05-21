@@ -481,7 +481,7 @@ public ContentResult About() {
 }
 ```
 
-#### Formato IActionResult (Content Negotiation)
+#### Retornando IActionResult Utilizando o Formato Através de Content Negotiation
 
 Content negotiation ocorre quando o cliente específica o formato a ser utilizado na resposta através do parâmetro header [Accept](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html). O formato padrão utilizado pelo **ASP.NET Core MVC** é o **JSON**, caso o cliente não solicite um formato específico. Content negotiation é implementado atarvés do objeto ```ObjectResult```. A classe controller possui métodos helper que estendem de ```ObjectResult```.
 
