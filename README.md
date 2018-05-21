@@ -424,10 +424,10 @@ O método ```GetById``` retorna um objeto que implementa [IActionResult](https:/
 
 A classe controller possui **métodos que retornam códigos de resposta HTTP**. Os mais comuns são:
 
-* **Ok()**:         Retorna 200 - Sucesso;
-* **NotContent()**: Retorna 204 - Sucesso. Sem conteúdo na resposta;
-* **BadRequest()**: Retorna 400 - Erro na solicitação;
-* **NotFound()**:   Retorna 404 - Recurso não encontrado;
+* **Ok()**:         Retorna 200 - **Sucesso**;
+* **NotContent()**: Retorna 204 - **Sucesso. Sem conteúdo na resposta**;
+* **BadRequest()**: Retorna 400 - **Erro na solicitação**;
+* **NotFound()**:   Retorna 404 - **Recurso não encontrado**;
 
 Exite também o método **StatusCode()** que permite retornar um código HTTP específico.
 
