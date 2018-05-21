@@ -6,9 +6,9 @@ using ProductAPI.Models;
 
 namespace ProductAPI.Controllers
 {
-    [Produces("application/json", "application/xml", "application/html")]
+    [Produces("application/json", "application/xml", "application/html")] // Permite ao serviço a aceitar somente os formatos definidos em Produces
     [Route("api/products")]
-    public class ProductController : ControllerBase {
+    public class ProductController : Controller {
         private readonly ProductContext context;
 
         // Construtor da classe

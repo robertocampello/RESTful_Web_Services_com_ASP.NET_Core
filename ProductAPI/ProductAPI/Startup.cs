@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +20,13 @@ namespace ProductAPI
         public void ConfigureServices(IServiceCollection services) {
             // Add framework services.
             services.AddDbContext<ProductContext>(opt => opt.UseInMemoryDatabase("ProductList"));
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                // Add XML Serializer formatters ao MVC. Permite ao MVC serializar objeto usando o formato XML
+                // tanto na solicitação quanto na resposta, caso a representação seja solicitada pelo cliente através do param Accept do header
+                options.InputFormatters.Add(new XmlSerializerInputFormatter());   // input
+                options.OutputFormatters.Add(new XmlSerializerOutputFormatter()); // output
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
