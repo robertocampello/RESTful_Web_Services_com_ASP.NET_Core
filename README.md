@@ -418,13 +418,9 @@ namespace ProductAPI.Controllers
 
 O ASP.NET Core permite **dois tipos de retorno** para o método action:
 
-* **Tipo Específico**
+* **Tipo Específico** - Um método action simples pode retornar um **tipo primitivo** ou um **tipo complexo** (por exemplo, ```string```, ou um objeto custom).
   
-  Um método action simples pode retornar um **tipo primitivo** ou um **tipo complexo** (por exemplo, ```string```, ou um objeto custom)
-  
-* **IActionResult**
-
-  O tipo [IActionResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult?view=aspnetcore-2.0) é  apropriado quando múltiplos tipos de retorno [ActionResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.actionresult?view=aspnetcore-2.0) são possíveis para o método action.
+* **IActionResult** - O tipo [IActionResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult?view=aspnetcore-2.0) é  apropriado quando múltiplos tipos de retorno [ActionResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.actionresult?view=aspnetcore-2.0) são possíveis para o método action.
   
 O método ```GetAll```retorna uma coleção de objetos ```Product```. A framework MVC automaticamente serializa o objeto [JSON](https://www.json.org/) e escreve no corpo da resposta. O código de resposta para este método é o **200**, assumindo que não ocorra nenhuma exception. Exceções não tratadas são convertidas em erros **5xx**.
 
@@ -432,18 +428,18 @@ O método ```GetById``` retorna um objeto que implementa [IActionResult](https:/
 
 * [NotFoundResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.notfoundresult?view=aspnetcore-2.0)(**404**) caso **não seja encontrado** um produto com o código informado e em **caso de sucesso** é retornado [OkObjectResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.okobjectresult?view=aspnetcore-2.0)(**200**) com a representação JSON no corpo da resposta.
 
-A classe controller possui **métodos que retornam códigos de resposta HTTP**. Os mais comuns são:
+A classe controller possui **métodos helper que retornam códigos de resposta HTTP**. Os mais comuns são:
 
 * **Ok()**:         Retorna 200 - **Sucesso**;
 * **NotContent()**: Retorna 204 - **Sucesso. Sem conteúdo na resposta**;
 * **BadRequest()**: Retorna 400 - **Erro na solicitação**;
 * **NotFound()**:   Retorna 404 - **Recurso não encontrado**;
 
-Exite também o método **StatusCode()** que permite retornar um código HTTP específico.
+Exite também o método helper **StatusCode()** que permite retornar um **código HTTP específico**.
 
 ## Formatando os dados de resposta
 
-**ASP.NET Core** oferece as seguintes opções para **tipos de retorno** nos métodos action controller:
+O **ASP.NET Core MVC** tem suporte integrado para **formatar dados de resposta**, usando *formatos fixos* ou *formatos específicos* solicitados pelo cliente.
 
 ## Testando a aplicação
 
