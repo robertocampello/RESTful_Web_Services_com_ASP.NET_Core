@@ -15,11 +15,11 @@ Logo a comunidade percebeu que o modelo de arquitetura REST poderia ser utilizad
 
 **RESTful** é quando um determinado projeto implementa os princípios/padrÕes do REST.
 
-[ASP.NET Web API](https://docs.microsoft.com/en-us/aspnet/web-api/) é uma framework para construir Web APIs. Neste tutorial iremos construir uma aplicação RESTful para um Cadastro de Produtos (CRUD), utilizando ASP.NET Web API. Vamos demonstrar também os princípios na implementação de uma aplicação RESTful.
+[ASP.NET Web API](https://docs.microsoft.com/en-us/aspnet/web-api/) é uma framework para construir Web APIs. Neste tutorial iremos construir uma aplicação RESTful para um **Cadastro de Produtos (CRUD)**, utilizando **ASP.NET Web API**. Vamos demonstrar também os princípios na implementação de uma aplicação RESTful.
 
 ## Princípios de uma aplicação RESTful
 
-A seguir vamos apresentar os princípios do RESTful e como utilizá-los de maneira correta na sua aplicação.
+A seguir vamos apresentar os **princípios do RESTful** e como utilizá-los de **maneira correta** na sua aplicação.
 
 ### Identificação dos Recursos
 
