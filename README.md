@@ -439,7 +439,35 @@ Exite também o método helper **StatusCode()** que permite retornar um **códig
 
 ## Formatando os dados de resposta
 
-O **ASP.NET Core MVC** tem suporte integrado para **formatar dados de resposta**, usando *formatos fixos* ou *formatos específicos* solicitados pelo cliente.
+O **ASP.NET Core MVC** tem suporte integrado para **formatar** dados de resposta, através de **duas formas**:
+
+* **Formato Específico**
+* **Utilizando IActionResult**
+
+### Formato Específico
+
+Alguns tipos de retorno são específicos para um particular formato, como ```JsonResult``` e ```ContentResult```. Actions podem retornar formatos específicos que são sempre formatados da mesma maneira. Por exemplo, se você retorna ```JsonReusult``` a representação retornada na resposta será **sempre no formato JSON**, independente das preferências do cliente. Assim como, se a action retornar ```ContentResult``` a represetação será sempre no formato **plain/text**. 
+
+**Observação:** Uma action não requer um tipo de retorno específico. A framework MVC dá suporte para **qualquer tipo de retorno**. Se a action retornar um objeto do tipo ```IActionResult``` e a controller herdar da classe ```Controller```, você poderá utilizar **métodos helper** para auxiliar no retorno. Actions que retornem objetos que não são sejam ```IActionResult``` irão ser serializados usando o método de formatação definido na implementação ```IOutputFormatter```.
+
+#### Retornando ao formato JSON
+
+Se a sua classe herdar da classe base ```Controller```, utilize o método helper ```Json``` para retornar a representação no **formato JSON**. Conforme exemplo abaixo:
+
+```C#
+/// <summary>
+/// Retorna lista de produtos no formato JSON
+/// </summary>
+/// <returns></returns>
+[HttpGet]
+public JsonResult Get() {
+    return Json(context.ProductItems.ToList());
+}
+```
+
+Resposta para o método action ```Get``` definido acima:
+
+![Response GET Json](images/10.png)
 
 ## Testando a aplicação
 
