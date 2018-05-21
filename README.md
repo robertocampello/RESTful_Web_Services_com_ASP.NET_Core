@@ -416,9 +416,19 @@ namespace ProductAPI.Controllers
 
 ## Retornando valores
 
+O ASP.NET Core permite **dois tipos de retorno** para o método action:
+
+* **Tipo Específico**
+  
+  Um método action simples pode retornar um **tipo primitivo** ou um **tipo complexo** (por exemplo, ```string```, ou um objeto custom)
+  
+* **IActionResult**
+
+  O tipo [IActionResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult?view=aspnetcore-2.0) é  apropriado quando múltiplos tipos de retorno [ActionResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.actionresult?view=aspnetcore-2.0) são possíveis para o método action.
+  
 O método ```GetAll```retorna uma coleção de objetos ```Product```. A framework MVC automaticamente serializa o objeto [JSON](https://www.json.org/) e escreve no corpo da resposta. O código de resposta para este método é o **200**, assumindo que não ocorra nenhuma exception. Exceções não tratadas são convertidas em erros **5xx**.
 
-O método ```GetById``` retorna um objeto que implementa [IActionResult](https://docs.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-2.0#iactionresult-type) necessário quando há necessidade de retornar **mais de um tipo de retorno**. O método possui **dois tipos** de retorno possíveis:
+O método ```GetById``` retorna um objeto que implementa [IActionResult](https://docs.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-2.0#iactionresult-type) necessário, pois temos **dois tipos** de retorno possíveis:
 
 * [NotFoundResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.notfoundresult?view=aspnetcore-2.0)(**404**) caso **não seja encontrado** um produto com o código informado e em **caso de sucesso** é retornado [OkObjectResult](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.okobjectresult?view=aspnetcore-2.0)(**200**) com a representação JSON no corpo da resposta.
 
@@ -431,7 +441,7 @@ A classe controller possui **métodos que retornam códigos de resposta HTTP**. 
 
 Exite também o método **StatusCode()** que permite retornar um código HTTP específico.
 
-## Tipos de Retorno Controlle Action
+## Formatando os dados de resposta
 
 **ASP.NET Core** oferece as seguintes opções para **tipos de retorno** nos métodos action controller:
 
