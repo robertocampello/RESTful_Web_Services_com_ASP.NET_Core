@@ -327,7 +327,7 @@ namespace ProductAPI.Controllers
 }
 ````
 
-Usando este template a classe é criada sem métodos. Nas próximas seções nós **incluir os métodos da API**.
+Usando este template a classe é criada sem métodos. Nas próximas seções nós **incluiremos os métodos da API**.
 
 O construtor da classe usa [Dependency Injection](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-2.0) para injetar o database context ```ProductContext``` no atributo context da controller. 
 O database context é usado em cada **método CRUD** da controller. O construtor adiciona um item no database memory, caso não exista.
