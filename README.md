@@ -483,7 +483,7 @@ public ContentResult About() {
 
 ### Content Negotiation
 
-**Content negotiation** ocorre quando o cliente específica o formato a ser utilizado na resposta através do parâmetro header [Accept](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html). O formato padrão utilizado pelo **ASP.NET Core MVC** é o **JSON**, caso o cliente não solicite um formato específico. **Content negotiation** é implementado através do objeto ```ObjectResult```. A classe controller possui métodos helper que estendem de ```ObjectResult```.
+**Content Negotiation** ocorre quando o cliente específica o formato a ser utilizado na resposta através do parâmetro header [Accept](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html). O formato padrão utilizado pelo **ASP.NET Core MVC** é o **JSON**, caso o cliente não solicite um formato específico. **Content Negotiation** é implementado através do objeto ```ObjectResult```. A classe controller possui métodos helper que estendem de ```ObjectResult```.
 
 Abaixo o exemplo do método ```GetById``` da classe ```ProductController```:
 
@@ -503,14 +503,14 @@ public IActionResult GetById(int id) {
 }
 ```
 
-O processo de **Content negotiation** ocorre da seguinte forma:
+O processo de **Content Negotiation** ocorre da seguinte forma:
 
 1. Caso a solicitação tenha o parâmetro ```Accept``` definido, a framework **enumera** os tipos de formatos em ordem de preferência e tenta **encontrar** um formato que possa produzir a resposta;
 2. Caso **nenhum formato** seja encontrado a framework irá tentar encontrar o **primeiro formato** que possa produzir a resposta (a menos que o desenvolvedor tenha configurado ```MvcOptions``` para retornar o código **406 Not Acceptable**). Por exemplo, se o formato especificado na solicitação for **XML**, mas o formato não estiver configurado, então o **formato JSON** será utilizado na serialização do objeto. 
 
 **Observação**: Mais a frente veremos, como configurar o **formato XML** para produzir uma resposta em XML, caso solicitado pelo cliente.
 
-#### Browsers and Content Negotiation
+#### Browsers e Content Negotiation
 
 Ao contrário das ferramentas de API, os navegadores da Web **tendem a fornecer o header** ```Accept```, incluindo vários formatos inclusive *wildcards*. Por default a framework ignora o parâmetro ```Accept``` quando detecta que a solicitação está vindo do browser, sendo retornado neste caso o **formato default JSON**. Para permitir que a sua aplicação aceite o parâmetro ```Accept``` vindo do browser, você deve setar o parâmetro ```RespectBrowserAcceptHeader``` para ```true``` no método ```ConfigureServices``` da classe *Statup.cs*. Altere a classe **Startup** do nosso projeto, conforme definido abaixo:
 
@@ -559,7 +559,7 @@ Vejamos o resultado da resposta ao método ```GetAll``` com a representação XM
 
 Observe que neste caso a representação retornada na **resposta foi XML**, de acordo com a solicitação do cliente.
 
-### Forçando um Formato Particular
+## Forçando um Formato Particular
 
 Você pode utilizar o atributo ```[Produces]```, na declaração da classe ```Controller``` caso deseje forçar **somente um ou mais formatos** a serem retornados na respota, conforme definido abaixo:
 
@@ -710,3 +710,5 @@ Abra o aplicativo **Postman** instalado e siga os passos abaixo para **criar uma
 A figura abaixo **demonstra os passos** para execução do método **HTTP POST Create** através do **Postman**.
 
 ![Postman Request Create](images/9.png)
+
+Neste tutorial, vimos como implementar uma aplicação **RESTful** utilizando a **ASP.Net Web API**. Dúvidas e sugestões, por favor entrem em contato. Espero que tenham gostado e até o próximo tutorial.
