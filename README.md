@@ -118,13 +118,13 @@ Veja um exemplo de uma representação de um recurso **sem a utilização** do c
 </order>
 ```
 
-A representação do recurso sem a utilização de HATEOAS, pode gerar dúvidas como:
+A representação do recurso sem a utilização de **HATEOAS**, pode gerar dúvidas como:
 
 * É possível solicitar o cancelamento do pedido? Como solicito?
 * Como obter mais informações sobre o cliente desse pedido?
 * Quais são os outros estados do pedido e como transitar entre eles?
 
-As dúvidas acima poderiam ser respondidas se o conceito HATEOAS fosse aplicado, facilitando assim o entendimento dos clientes do serviço REST. Vejamos agora a representação **utilizando o conceito** HATEOAS:
+As dúvidas acima poderiam ser respondidas se o conceito **HATEOAS** fosse aplicado, facilitando assim o entendimento dos clientes do serviço REST. Vejamos agora a representação **utilizando o conceito**:
 
 ```html
 <order self="http://servicorest.com.br/pedidos/1459">
