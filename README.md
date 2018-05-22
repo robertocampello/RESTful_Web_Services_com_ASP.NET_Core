@@ -557,6 +557,20 @@ Vejamos o resultado da resposta ao método ```GetAll``` com a representação XM
 
 ![Response GET XML](images/11.png)
 
+Observe que neste caso a representação retornada na **resposta foi XML**, de acordo com a solicitação do cliente.
+
+### Forçando um Formato Particular
+
+Você pode utilizar o atributo ```[Produces]```, na declaração da classe ```Controller``` caso deseje forçar **somente um ou mais formatos** a serem retornados na respota, conforme definido abaixo:
+
+```C#
+[Produces("application/json", "application/xml", "application/html")] 
+[Route("api/products")]
+public class ProductController : Controller {
+   ...
+}   
+```
+
 ## Testando a aplicação
 
 Podemos testar o que já foi desenvolvido até aqui, considerando os métodos ```GetXXX```. Para isto basta, pressionar **CTRL+F5** no Visual Studio para iniciar aplicação. O Visual Studio irá iniciar o browser e acessará a URL ```http://localhost:<port>/api/values```, onde ```<port>``` será uma porta definida randomicamente. Para executar o método que retorna todos os produtos acesse a URL ```http://localhost:<port>/api/products```.
