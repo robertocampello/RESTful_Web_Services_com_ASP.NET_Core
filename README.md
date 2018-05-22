@@ -442,7 +442,7 @@ Exite também o método helper **StatusCode()** que permite retornar um **códig
 O **ASP.NET Core MVC** tem suporte integrado para **formatar** dados de resposta, através de **duas formas**:
 
 * **Formato Específico**
-* **Formato IActionResult (Content Negotiation)**
+* **Content Negotiation** - conforme preferências do cliente
 
 ### Formato Específico
 
@@ -481,7 +481,7 @@ public ContentResult About() {
 }
 ```
 
-#### Retornando IActionResult Utilizando o Formato Através de Content Negotiation
+### Content Negotiation
 
 **Content negotiation** ocorre quando o cliente específica o formato a ser utilizado na resposta através do parâmetro header [Accept](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html). O formato padrão utilizado pelo **ASP.NET Core MVC** é o **JSON**, caso o cliente não solicite um formato específico. **Content negotiation** é implementado através do objeto ```ObjectResult```. A classe controller possui métodos helper que estendem de ```ObjectResult```.
 
@@ -510,8 +510,52 @@ O processo de **Content negotiation** ocorre da seguinte forma:
 
 **Observação**: Mais a frente veremos, como configurar o **formato XML** para produzir uma resposta em XML, caso solicitado pelo cliente.
 
-When a request contains an accept header, the framework will enumerate the media types in the accept header in preference order and will try to find a formatter that can produce a response in one of the formats specified by the accept header. In case no formatter is found that can satisfy the client's request, the framework will try to find the first formatter that can produce a response (unless the developer has configured the option on MvcOptions to return 406 Not Acceptable instead). If the request specifies XML, but the XML formatter has not been configured, then the JSON formatter will be used. More generally, if no formatter is configured that can provide the requested format, then the first formatter that can format the object is used. If no header is given, the first formatter that can handle the object to be returned will be used to serialize the response. In this case, there isn't any negotiation taking place - the server is determining what format it will use.
+#### Browsers and Content Negotiation
 
+Ao contrário das ferramentas de API, os navegadores da Web **tendem a fornecer o header** ```Accept```, incluindo vários formatos inclusive *wildcards*. Por default a framework ignora o parâmetro ```Accept``` quando detecta que a solicitação está vindo do browser, sendo retornado neste caso o **formato default JSON**. Para permitir que a sua aplicação aceite o parâmetro ```Accept``` vindo do browser, você deve setar o parâmetro ```RespectBrowserAcceptHeader``` para ```true``` no método ```ConfigureServices``` da classe *Statup.cs*. Altere a classe **Startup** do nosso projeto, conforme definido abaixo:
+
+```C#
+// This method gets called by the runtime. Use this method to add services to the container.
+public void ConfigureServices(IServiceCollection services) {
+    // Add framework services.
+    services.AddDbContext<ProductContext>(opt => opt.UseInMemoryDatabase("ProductList"));
+    services.AddMvc(options =>
+    {
+        // Necessário para aceitar o param Accept vindo de cliente browser
+        options.RespectBrowserAcceptHeader = true;
+    });
+}
+```
+
+## Configurando Formatos
+
+Se a sua aplicação necessita suportar **formatos adicionais**, além do formato default JSON, você deve configurar o MVC para suportá-los. Existem métodos que te permitem **adicionar** formatadores específico para **input (request)** ou **output (response)**. Você pode também configurar [Formatos Custom](https://docs.microsoft.com/en-us/aspnet/core/web-api/advanced/custom-formatters?view=aspnetcore-2.1).
+
+### Adicionando o suporte ao formato XML
+
+Para permitir que a aplicação retorne o formato XML na resposta, caso seja solicitado pelo cliente, você deve **adicionar o formatador** no MVC. Altere o método ```ConfigureServices``` da classe **Startup** do nosso projeto, conforme descrito abaixo:
+
+```C#
+// This method gets called by the runtime. Use this method to add services to the container.
+public void ConfigureServices(IServiceCollection services) {
+    // Add framework services.
+    services.AddDbContext<ProductContext>(opt => opt.UseInMemoryDatabase("ProductList"));
+    services.AddMvc(options =>
+    {
+        // Necessário para aceitar o param Accept vindo de cliente browser
+        options.RespectBrowserAcceptHeader = true;
+
+        // Add XML Serializer formatters ao MVC. Permite ao MVC serializar objeto usando o formato XML
+        // tanto na solicitação quanto na resposta, caso a representação seja solicitada pelo cliente através do param Accept do header
+        options.InputFormatters.Add(new XmlSerializerInputFormatter());   // input
+        options.OutputFormatters.Add(new XmlSerializerOutputFormatter()); // output
+    });
+}
+```
+
+Vejamos o resultado da resposta ao método ```GetAll``` com a representação XML:
+
+![Response GET XML](images/11.png)
 
 ## Testando a aplicação
 
