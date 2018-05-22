@@ -22,6 +22,9 @@ namespace ProductAPI
             services.AddDbContext<ProductContext>(opt => opt.UseInMemoryDatabase("ProductList"));
             services.AddMvc(options =>
             {
+                // Necessário para aceitar o param Accept vindo de cliente browser
+                options.RespectBrowserAcceptHeader = true;
+
                 // Add XML Serializer formatters ao MVC. Permite ao MVC serializar objeto usando o formato XML
                 // tanto na solicitação quanto na resposta, caso a representação seja solicitada pelo cliente através do param Accept do header
                 options.InputFormatters.Add(new XmlSerializerInputFormatter());   // input
