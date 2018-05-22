@@ -452,7 +452,7 @@ Alguns tipos de retorno são específicos para um particular formato, como ```Js
 
 #### Retornando o formato JSON
 
-Se a sua classe herdar da classe base ```Controller```, utilize o método helper ```Json``` para retornar a representação no **formato JSON**. Conforme definido abaixo:
+Utilize o método helper ```Json``` da classe base ```Controller``` para retornar a representação no **formato JSON**. Conforme definido abaixo:
 
 ```C#
 /// <summary>
@@ -483,7 +483,7 @@ public ContentResult About() {
 
 #### Retornando IActionResult Utilizando o Formato Através de Content Negotiation
 
-Content negotiation ocorre quando o cliente específica o formato a ser utilizado na resposta através do parâmetro header [Accept](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html). O formato padrão utilizado pelo **ASP.NET Core MVC** é o **JSON**, caso o cliente não solicite um formato específico. Content negotiation é implementado atarvés do objeto ```ObjectResult```. A classe controller possui métodos helper que estendem de ```ObjectResult```.
+**Content negotiation** ocorre quando o cliente específica o formato a ser utilizado na resposta através do parâmetro header [Accept](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html). O formato padrão utilizado pelo **ASP.NET Core MVC** é o **JSON**, caso o cliente não solicite um formato específico. **Content negotiation** é implementado através do objeto ```ObjectResult```. A classe controller possui métodos helper que estendem de ```ObjectResult```.
 
 Abaixo o exemplo do método ```GetById``` da classe ```ProductController```:
 
@@ -502,6 +502,16 @@ public IActionResult GetById(int id) {
     return Ok(item);
 }
 ```
+
+O processo de **Content negotiation** ocorre da seguinte forma:
+
+1. Caso a solicitação tenha o parâmetro ```Accept``` definido, a framework **enumera** os tipos de formatos em ordem de preferência e tenta **encontrar** um formato que possa produzir a resposta;
+2. Caso **nenhum formato** seja encontrado a framework irá tentar encontrar o **primeiro formato** que possa produzir a resposta (a menos que o desenvolvedor tenha configurado ```MvcOptions``` para retornar o código **406 Not Acceptable**). Por exemplo, se o formato especificado na solicitação for **XML**, mas o formato não estiver configurado, então o **formato JSON** será utilizado na serialização do objeto. 
+
+**Observação**: Mais a frente veremos, como configurar o **formato XML** para produzir uma resposta em XML, caso solicitado pelo cliente.
+
+When a request contains an accept header, the framework will enumerate the media types in the accept header in preference order and will try to find a formatter that can produce a response in one of the formats specified by the accept header. In case no formatter is found that can satisfy the client's request, the framework will try to find the first formatter that can produce a response (unless the developer has configured the option on MvcOptions to return 406 Not Acceptable instead). If the request specifies XML, but the XML formatter has not been configured, then the JSON formatter will be used. More generally, if no formatter is configured that can provide the requested format, then the first formatter that can format the object is used. If no header is given, the first formatter that can handle the object to be returned will be used to serialize the response. In this case, there isn't any negotiation taking place - the server is determining what format it will use.
+
 
 ## Testando a aplicação
 
