@@ -559,9 +559,9 @@ Vejamos o resultado da resposta ao método ```GetAll``` com a representação XM
 
 Observe que neste caso a representação retornada na **resposta foi XML**, de acordo com a solicitação do cliente.
 
-## Forçando um Formato Particular
+## Definindo um Formato Específico
 
-Você pode utilizar o atributo ```[Produces]```, na declaração da classe ```Controller``` caso deseje forçar **somente um ou mais formatos** a serem retornados na respota, conforme definido abaixo:
+Você pode utilizar o atributo ```[Produces]```, na declaração da classe ```Controller``` para definir uma lista de formatos aceitos no retorno da respota, conforme definido abaixo:
 
 ```C#
 [Produces("application/json", "application/xml", "application/html")] 
@@ -710,5 +710,40 @@ Abra o aplicativo **Postman** instalado e siga os passos abaixo para **criar uma
 A figura abaixo **demonstra os passos** para execução do método **HTTP POST Create** através do **Postman**.
 
 ![Postman Request Create](images/9.png)
+
+## Implementando o conceito HATEOAS
+
+Não existe um **padrão definido** pela framework MVC para implementação do conceito **HATEOAS**. A implementação vai depender de como será especificado a representação do recurso e da lógica implementada por cada desenvolvedor. O principal é implementar o conceito definindo na resposta os links orientando ao cliente sobre o **estado atual** e quais **demais operações** podem ser realizadas.
+
+Segue abaixo um exemplo da resposta para o método ```GetById``` da classe ```Product```, utilizando o conceito **HATEOAS**. Nesta implementação, foi utilizado um padrão de projeto, onde foi definido uma classe modelo ```Link``` e uma classe helper ```LinkHelper``` que encapsula o objeto ```Product``` de forma genérica e a lista de links. O código-fonte disponível no **GitHub**, contém a implementação.
+
+```JSON
+{
+    "value": {
+        "productID": 1,
+        "productCode": "Product Code 1",
+        "name": "Product Item 1",
+        "quantity": 1,
+        "price": 110.5
+    },
+    "links": [
+        {
+            "href": "http://localhost:53930/api/products/1",
+            "rel": "self",
+            "method": "GET"
+        },
+        {
+            "href": "http://localhost:53930/api/products/1",
+            "rel": "update-product",
+            "method": "PUT"
+        },
+        {
+            "href": "http://localhost:53930/api/products/1",
+            "rel": "delete-product",
+            "method": "DELETE"
+        }
+    ]
+}
+```
 
 Neste tutorial, vimos como implementar uma aplicação **RESTful** utilizando a **ASP.Net Web API**. Dúvidas e sugestões, por favor entrem em contato. Espero que tenham gostado e até o próximo tutorial.
