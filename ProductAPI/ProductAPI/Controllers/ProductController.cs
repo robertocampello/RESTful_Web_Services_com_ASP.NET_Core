@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using ProductAPI.Models;
+using ProductAPI.Models.Helper;
 
 namespace ProductAPI.Controllers
 {
@@ -27,8 +29,11 @@ namespace ProductAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public List<Product> GetAll() {
-            return context.ProductItems.ToList();
+        public IActionResult GetAll() {
+            List<Product> list = context.ProductItems.ToList();
+
+            // Retorna 
+            return Ok(list);
         }
 
         /// <summary>
@@ -42,7 +47,36 @@ namespace ProductAPI.Controllers
             if (item == null) {
                 return NotFound();
             }
-            return Ok(item);
+
+            // Cria objeto link helper 
+            var linkHelper = new LinkHelper<Product>(item);
+
+            // Cria Link Self
+            linkHelper.Links.Add(new Link
+            {
+                Href   = Url.Link("GetProduct", null),
+                Rel    = "self",
+                method = "GET"
+            });
+
+            // Cria link Update
+            linkHelper.Links.Add(new Link
+            {
+                Href = Url.Link("UpdateProduct", null),
+                Rel = "update-product",
+                method = "PUT"
+            }); 
+
+            // Cria link Delete
+            linkHelper.Links.Add(new Link
+            {
+                Href   = Url.Link("DeleteProduct", null),
+                Rel    = "delete-product",
+                method = "DELETE"
+            });
+
+            // Retorna objeto
+            return Ok(linkHelper);
         }
 
         /// <summary>
@@ -70,7 +104,7 @@ namespace ProductAPI.Controllers
         /// <param name="id"></param>
         /// <param name="item"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
+        [HttpPut("{id}", Name = "UpdateProduct")]
         public IActionResult Update(long id, [FromBody] Product item) {
             // Caso id não seja igual ao id do produto 
             if (item == null || item.ProductID != id) {
@@ -102,7 +136,7 @@ namespace ProductAPI.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name = "DeleteProduct")]
         public IActionResult Delete(long id) {
             // Busca produto pelo ID
             var item = context.ProductItems.Find(id);
