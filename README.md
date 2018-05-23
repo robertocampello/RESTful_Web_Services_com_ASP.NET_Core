@@ -746,4 +746,4 @@ Segue abaixo um exemplo da resposta para o método ```GetById``` da classe ```Pr
 }
 ```
 
-Neste tutorial, vimos como implementar uma aplicação **RESTful** utilizando a **ASP.Net Web API**. Dúvidas e sugestões, por favor entrem em contato. Espero que tenham gostado e até o próximo tutorial.
+Neste tutorial, vimos como implementar uma aplicação **RESTful** utilizando **ASP.Net Web API**. Dúvidas e sugestões, por favor entrem em contato. Espero que tenham gostado e até o próximo tutorial.
