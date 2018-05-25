@@ -21,7 +21,7 @@ Logo a comunidade percebeu que o modelo de arquitetura REST poderia ser utilizad
 
 A seguir vamos apresentar os **princípios do RESTful** e como utilizá-los de **maneira correta** na sua aplicação.
 
-### Identificação dos Recursos
+### 1. Identificação dos Recursos
 
 Toda aplicação gerencia algumas informações. Uma aplicação de um E-commerce, por exemplo, gerencia seus produtos, clientes, vendas, etc. Essas coisas que uma aplicação gerencia são chamadas de Recursos no modelo REST.
 
@@ -48,12 +48,12 @@ As URI’s representam a interface dos seus serviços, definindo um contrato que
   ![Patterns Methods](images/2.png)
 
 * **Evite incluir na URI o formato desejado da representação do recurso.**
-```http://apirest.com/products/xml```
-```http://apirest.com/customers/10?formato=json```
+  ```http://apirest.com/products/xml```
+  ```http://apirest.com/customers/10?formato=json```
 
-### Representação dos Recursos
+### 2. Representação dos Recursos
 
-Os recursos são armazenados pela aplicação que os manipula. Quando são solicitados pelas aplicações clientes, por exemplo em uma solicitação do tipo GET, é transferido para a aplicação cliente uma representação do recurso.
+Os recursos são **armazenados pela aplicação** que os manipula. Quando solicitados pelas aplicações clientes, em uma solicitação do tipo **GET** por exemplo, são transferidos para o cliente através de uma **representação do recurso**.
 
 Um recurso pode ser representado através de diversos formatos, tais como ```XML```, ```JSON```, ```HTML```, ```CSV```, entre outros. Abaixo é demonstrado um exemplo de representação de um recurso no formato ```XML```:
 
@@ -73,21 +73,21 @@ O cliente sempre utiliza a representação do recurso para efetuar a comunicaç�
 * JSON
 * XML
 
-### Utilize Content Negotiation para o suporte de múltiplas representações
+### 3. Utilizar Content Negotiation no suporte a Múltiplas Representações
 
-Como vimos na seção anterior um serviço REST pode suportar **múltiplas representações** de recursos. Portanto, nesses casos é esperado que o cliente forneça o formato desejado a ser utilizado. No REST esta negociação é chamada de **Content Negotiation** e na solicitação Web é feita através de um cabeçalho HTTP definido como ```Accept```.
+Como vimos anteriormente um serviço REST pode suportar **múltiplas representações** de recursos. Portanto, nesses casos é esperado que o cliente forneça o formato desejado a ser utilizado. No REST esta negociação é chamada de **Content Negotiation** e na solicitação Web é feita através de um cabeçalho HTTP definido como ```Accept```.
 
 O cliente pode portanto, incluir no cabeçalho **Accept** da solicitação o formato desejado da representação do recurso. Entretanto, deve ser um formato suportado pelo serviço REST.
 
-### Mantenha um relacionamento Stateless o desenvolvimento dos Serviços REST
+### 4. Manter Relacionamento Stateless no Desenvolvimento dos Serviços REST
 
-O protocolo HTTP é um protocolo que não guarda estado de conversação, ou seja, é um protocolo **stateless**, cada solicitação e resposta feita ao servidor HTTP são independentes de todas as outras. Portanto, este é um dos princípios mais difíceis de ser implementado, pois  é comum que aplicações mantenham estado entre as várias solicitações de clientes.
+HTTP é um protocolo que não guarda estado de conversação, ou seja, é um protocolo **stateless**, cada solicitação e resposta feita ao servidor HTTP são independentes de todas as outras. Portanto, este é um dos princípios mais difíceis de ser implementado, pois  é comum que aplicações mantenham estado entre as várias solicitações de clientes.
 
 Manter uma comunicação stateless é importante, pois ganha-se em escalabilidade e alta performance, podendo com isto atender um número alto de clientes sem problemas.
 
 Solicitações feitas por um cliente a um serviço REST devem conter todas as informações necessárias para que o servidor as processe corretamente. Clientes **não devem** depender de dados **previamente armazenados** no servidor para processar uma requisição. Qualquer informação de estado deve ser mantida pelo cliente e não pelo servidor.
 
-### Evite manter dados de autenticação/autorização em sessão
+### 5. Evitar Dados de Autenticação/Autorização em Sessão
 
 Uma das principais dificuldades de se criar um serviço REST totalmente Stateless ocorre quando **há necessidade de prover autenticação/autorização de clientes**. O principal problema ocorre por que é natural que os desenvolvedores armazenem essas informações em sessão, pois essa solução é comum ao se desenvolver uma aplicação Web tradicional.
 
@@ -101,9 +101,9 @@ Existem **diversas tecnologias** e padrões para se trabalhar com Tokens, entre 
 
 Portanto, evite a utilização de objetos session em aplicações REST. O ideal é que sua aplicação seja **totalmente Stateless**.
 
-### HATEOAS (Hypermedia As The Engine Of Application State)
+### 6. Implementar o Conceito HATEOAS (Hypermedia As The Engine Of Application State)
 
-Este conceito é muito aplicado no desenvolvimento de aplicações Web. Consiste em um mecanismo para orientar conduzir o cliente quanto à navegação e ao estado dos recursos. [HATEOAS](https://restfulapi.net/hateoas/), nada mais é do que a utilização de Hypermedia, com o uso de links, como o motor para guiar os clientes quanto ao estado atual dos recursos, e também quanto as transições de estado que são possíveis no momento.
+Este conceito é muito aplicado no desenvolvimento de aplicações Web. Consiste em um mecanismo para orientar/conduzir o cliente quanto à navegação e ao estado dos recursos. [HATEOAS](https://restfulapi.net/hateoas/), nada mais é do que a utilização de Hypermedia, com o uso de links, como o motor para guiar os clientes quanto ao estado atual dos recursos, e também quanto as transições de estado que são possíveis no momento.
 
 Veja um exemplo de uma representação de um recurso **sem a utilização** do conceito de **HATEOAS**:
 
@@ -149,7 +149,7 @@ As dúvidas acima poderiam ser respondidas se o conceito **HATEOAS** fosse aplic
 
 Observe que agora ficou mais simples explorar as informações e descobrir quais caminhos seguir. **HATEOAS** é um dos princípios pouco implementado no desenvolvimento de serviços REST no mercado, quase sempre por falta de conhecimento dos desenvolvedores.
 
-### Utilização correta dos códigos HTTP
+### 7. Utilização correta dos códigos HTTP
 
 Esta na verdade é uma boa prática e não um princípio. Consiste na **utilização correta** do código HTTP para cada tipo de situação. Evite sempre **utilizar um mesmo código genérico** para todas as situações, como por exemplo o código **200** para solicitações bem-sucedidas ou o código **500** para solicitações malsucedidas. Vejamos abaixo os principais códigos HTTP e quando os utilizá-los:
 
