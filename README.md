@@ -151,7 +151,7 @@ Observe que agora ficou mais simples explorar as informações e descobrir quais
 
 ### 7. Utilização correta dos códigos HTTP
 
-Esta na verdade é uma boa prática e não um princípio. Consiste na **utilização correta** do código HTTP para cada tipo de situação. Evite sempre **utilizar um mesmo código genérico** para todas as situações, como por exemplo o código **200** para solicitações bem-sucedidas ou o código **500** para solicitações malsucedidas. Vejamos abaixo os principais códigos HTTP e quando os utilizá-los:
+Esta na verdade é uma boa prática e não um princípio. Consiste na **utilização correta** do código HTTP para cada tipo de situação. Evite sempre **utilizar um mesmo código genérico** para todas as situações, como por exemplo o código **200** para solicitações bem-sucedidas ou o código **500** para solicitações onde ocorram erro. Vejamos abaixo os principais códigos HTTP e quando os utilizá-los:
 
 ![HTTP Codes](images/3.png)
 
@@ -161,7 +161,7 @@ Agora que já vimos os **principais princípios** de uma aplicação REST, vamos
 
 ![API App](images/4.png)
 
-O diagrama demonstra o desenho basico da aplicação
+O diagrama demonstra o desenho básico da aplicação:
 
 ![Diagram App](images/5.png)
 
@@ -169,14 +169,14 @@ O diagrama demonstra o desenho basico da aplicação
 
 * O modelo é um objeto que representa os dados na aplicação. Neste caso, o único modelo na nossa aplicação é um produto. Modelos são representados como classes C#, também conhecidas como **Plain Old C# Object (POCOs)**.
 
-* A controller é um objeto que intercepta as solicitações HTTP e cria a resposta HTTP. Nossa aplicação terá uma única controller.
+* A controller é um objeto que intercepta as solicitações HTTP e cria a resposta HTTP. Nossa aplicação terá uma única classe controller.
 
-* Para simplificar a camada de persistência, será utilizado o banco de dados em memória.
+* Para simplificar a camada de persistência, será utilizado o banco de dados em memória, usando **Entity Framework**.
 
 ## Pré-Requisitos
 
 1. Instalar o [Visual Studio](https://www.microsoft.com/net/download/windows) – Pode ser o community 
-2. Instalar o {Postman App](https://www.getpostman.com/apps) - Editor de API que permite testar as operações REST
+2. Instalar o [Postman App](https://www.getpostman.com/apps) - Editor de API que permite testar as operações REST
 3. Ter conhecimento no desenvolvimento **Web ASP.NET** e **.NET Core cross-platform**
 
 ## Criando o projeto
