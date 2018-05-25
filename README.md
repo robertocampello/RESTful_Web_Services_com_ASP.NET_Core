@@ -75,7 +75,7 @@ O cliente sempre utiliza a representação do recurso para efetuar a comunicaç�
 
 ### Utilize Content Negotiation para o suporte de múltiplas representações
 
-Como vimos no item anterior um serviço REST pode suportar **múltiplas representações** de recursos. Portanto, nesses casos é esperado que o cliente forneça o formato desejado a ser utilizado. No REST esta negociação é chamada de **Content Negotiation** e na solicitação Web é feita através de um cabeçalho HTTP definido como ```Accept```.
+Como vimos na seção anterior um serviço REST pode suportar **múltiplas representações** de recursos. Portanto, nesses casos é esperado que o cliente forneça o formato desejado a ser utilizado. No REST esta negociação é chamada de **Content Negotiation** e na solicitação Web é feita através de um cabeçalho HTTP definido como ```Accept```.
 
 O cliente pode portanto, incluir no cabeçalho **Accept** da solicitação o formato desejado da representação do recurso. Entretanto, deve ser um formato suportado pelo serviço REST.
 
