@@ -435,7 +435,7 @@ A classe controller possui **métodos helper** que estendem de ```ObjectResult``
 * **BadRequest()**: Retorna 400 - **Erro na solicitação**;
 * **NotFound()**:   Retorna 404 - **Recurso não encontrado**;
 
-Exite também o método helper **StatusCode()** que permite retornar um **código HTTP específico**.
+Existe também o método helper **StatusCode()** que permite retornar um **código HTTP específico**.
 
 ## Formatando os dados de resposta
 
@@ -446,7 +446,7 @@ O **ASP.NET Core MVC** tem suporte integrado para **formatar** dados de resposta
 
 ### Formato Específico
 
-Alguns tipos de retorno são específicos para um particular formato, como ```JsonResult``` e ```ContentResult```. Actions podem retornar formatos específicos que são sempre formatados da mesma maneira. Por exemplo, se você retorna ```JsonReusult``` a representação retornada na resposta será **sempre no formato JSON**, independente das preferências do cliente. Assim como, se a action retornar ```ContentResult``` a represetação será sempre no formato **plain/text**. 
+Alguns tipos de retorno são específicos para um formato em particular, como ```JsonResult``` e ```ContentResult```. Actions podem retornar formatos específicos que são sempre formatados da mesma maneira. Por exemplo, se você retorna ```JsonReusult``` a representação retornada na resposta será **sempre no formato JSON**, independente das preferências do cliente. Assim como, se a action retornar ```ContentResult``` a representação será sempre no formato **plain/text**. 
 
 **Observação:** Uma action não requer um tipo de retorno específico. A framework MVC dá suporte para **qualquer tipo de retorno**. Se a action retornar um objeto do tipo ```IActionResult``` e a controller herdar da classe ```Controller```, você poderá utilizar **métodos helper** para auxiliar no retorno. Actions que retornem objetos que não são sejam ```IActionResult``` irão ser serializados usando o método de formatação definido na implementação ```IOutputFormatter```.
 
@@ -469,7 +469,7 @@ Resposta para o método action ```Get``` definido acima:
 
 ![Response GET Json](images/10.png)
 
-Observe que mesmo a solicitação definindo o parâmetro header ```Accept``` como **application/xml** a resposta foi formatada com a represetação **application/json**, pois neste caso o tipo foi específico.
+Observe que mesmo a solicitação definindo o parâmetro header ```Accept``` como **application/xml** a resposta foi formatada com a representação **application/json**, pois neste caso o tipo foi específico.
 
 Para retornar o formato **plain text**, você deve retornar ```ContentResult``` e utilizar o método helper ```Content```, conforme definido abaixo:
 
@@ -559,7 +559,7 @@ Vejamos o resultado da resposta ao método ```GetAll``` com a representação XM
 
 Observe que neste caso a representação retornada na **resposta foi XML**, de acordo com a solicitação do cliente.
 
-## Definindo um Formato Específico
+## Definindo uma Lista de Formatos Específicos para a Resposta
 
 Você pode utilizar o atributo ```[Produces]```, na declaração da classe ```Controller``` para definir uma lista de formatos aceitos no retorno da respota, conforme definido abaixo:
 
