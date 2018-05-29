@@ -165,7 +165,7 @@ O diagrama demonstra o desenho básico da aplicação:
 
 ![Diagram App](images/5.png)
 
-* A aplicação cliente que vai consumir a Web API pode ser um (mobile app, browser, etc.). Neste tutorial nós não iremos uma criar uma aplicação cliente. Entretanto, você pode acessar o tutorial que demonstra como consumir uma [Web API REST através de um app Xamarin]().
+* A aplicação cliente que vai consumir a Web API pode ser um (mobile app, browser, etc.). Neste tutorial nós não iremos uma criar uma aplicação cliente. Entretanto, você pode acessar o tutorial que demonstra como consumir uma [Web API REST através de um app Xamarin](https://github.com/robertocampello/Consumindo_Uma_API_REST_Web-Services_Atraves_de_um_Mobile_App_Xamarin).
 
 * O modelo é um objeto que representa os dados na aplicação. Neste caso, o único modelo na nossa aplicação é um produto. Modelos são representados como classes C#, também conhecidas como **Plain Old C# Object (POCOs)**.
 
